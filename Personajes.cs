@@ -2,47 +2,32 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Net.Http;
 using System.Threading.Tasks;
-namespace espacioPersonaje
+
+
+namespace espacioPersonaje 
 {
-    enum Tipo
+    enum Arma
     {
-        shinigami,
-		humano,
-		quincy,
-		arrancar
+        Espada,
+		Pistola,
+		Portalgun,
+		Guante
     }
+
+    
 
     public class PersonajesJSON
     {
         [JsonPropertyName("id")]
-         public string Id { get; set; }
+         public int Id { get; set; }
 
         [JsonPropertyName("name")]
-        public Name Name{ get; set;}
+
+        public string Name{ get; set;}
 
         [JsonPropertyName("gender")]
         public string Gender{ get; set;}
 
-        [JsonPropertyName("height")]
-        public string height{ get; set;}
-
-        [JsonPropertyName("height")]
-        public string weight{ get; set;}
-
-
-
-    }
-
-    public class Name
-    {
-        [JsonPropertyName("english")]
-        public string English { get; set; }
-
-        [JsonPropertyName("kanji")]
-        public string Kanji { get; set; }
-
-        [JsonPropertyName("romaji")]
-        public string Romaji { get; set; }
     }
 
     public class Personajes
@@ -59,7 +44,7 @@ namespace espacioPersonaje
 
     public class Datos
     {
-        private Tipo tipo;
+        
         private string nombre;
         private string genero;
         private string cumpleaños;
@@ -76,17 +61,19 @@ namespace espacioPersonaje
         private int destreza;   //1 a 5
         private int fuerza;  //1 a 10
 
-        private int nivelReatsu; //1 a 10
+        private int nivel; //1 a 10
         private int armadura; //1 a 100
         private int salud; //1 a 100
+        private Arma arma;
     }
 
     public class obtenerPersonajesAPI
     {
+        
         private static readonly HttpClient client = new HttpClient();
          private static async Task<List<PersonajesJSON>> GetPjJSONs()
          {
-            var url = "https://bleach-api-8v2r.onrender.com/characters";
+            var url = "https://rickandmortyapi.com/api/character";
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode(); 
             string responseBody = await response.Content.ReadAsStringAsync();
