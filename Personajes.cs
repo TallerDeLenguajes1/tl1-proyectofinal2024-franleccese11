@@ -9,14 +9,14 @@ namespace espacioPersonaje
     enum Arma
     {
         Espada,
-		Pistola,
+		Neutrogun,
 		Portalgun,
-		Guante
+		Exoesqueleto
     }
 
     
 
-    public class PersonajesJSON
+    public class PersonajeJSON
     {
         [JsonPropertyName("id")]
          public int Id { get; set; }
@@ -28,14 +28,20 @@ namespace espacioPersonaje
         [JsonPropertyName("gender")]
         public string Gender{ get; set;}
 
+        [JsonPropertyName("species")]
+        public string Species{ get; set;}
+
+        [JsonPropertyName("location")]
+        public string Location{ get; set;}
+
     }
 
-    public class Personajes
+    public class Personaje
     {   
         private Datos datos;
         private Caracteristicas caracteristicas;
 
-        public Personajes(Datos datos,Caracteristicas caracteristicas)
+        public Personaje(Datos datos,Caracteristicas caracteristicas)
         {
             this.caracteristicas = caracteristicas;
             this.datos = datos;
@@ -47,11 +53,17 @@ namespace espacioPersonaje
         
         private string nombre;
         private string genero;
-        private string cumpleaños;
+        private string especie;
 
-        private string altura;
+        private string origen;
 
-        private string peso;
+        public Datos(string nombre,string genero,string especie,string origen)
+        {
+            this.nombre = nombre;
+            this.genero = genero;
+            this.especie = especie;
+            this.origen = origen;
+        }
     }
 
 
@@ -65,22 +77,37 @@ namespace espacioPersonaje
         private int armadura; //1 a 100
         private int salud; //1 a 100
         private Arma arma;
+
+
+
     }
 
-    public class obtenerPersonajesAPI
+    public class FabricaDePersonajes
     {
         
         private static readonly HttpClient client = new HttpClient();
-         private static async Task<List<PersonajesJSON>> GetPjJSONs()
-         {
+        private static async Task<List<PersonajeJSON>> GetPjJSONs()
+        {
             var url = "https://rickandmortyapi.com/api/character";
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode(); 
             string responseBody = await response.Content.ReadAsStringAsync();
-            List<PersonajesJSON> listaPersonajes = JsonSerializer.Deserialize<List<PersonajesJSON>>(responseBody);
+            List<PersonajeJSON> listaPersonajes = JsonSerializer.Deserialize<List<PersonajeJSON>>(responseBody);
             return listaPersonajes;
-         }
+        }
+
+        public static Personaje CrearPersonaje(List <PersonajeJSON>listaPersonajes)
+    {
+        var semilla = Environment.TickCount;
+        Random random = new Random(semilla);
+        int N = random.Next(0,listaPersonajes.Count);
+
     }
+
+
+    }
+
 }
+
 
 
