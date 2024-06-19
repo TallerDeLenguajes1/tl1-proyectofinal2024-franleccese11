@@ -14,101 +14,87 @@ namespace espacioPersonaje
 		Exoesqueleto
     }
 
-    public class PersonajeAPI
+     public class Info
     {
-        public class Info
-        {
-            [JsonPropertyName("count")]
-            public int count { get; set; }
+        [JsonPropertyName("count")]
+        public int Count { get; set; }
 
-            [JsonPropertyName("pages")]
-            public int pages { get; set; }
+        [JsonPropertyName("pages")]
+        public int Pages { get; set; }
 
-            [JsonPropertyName("next")]
-            public string next { get; set; }
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
 
-            [JsonPropertyName("prev")]
-            public object prev { get; set; }
-        }
-
-        public class Location
-        {
-            [JsonPropertyName("name")]
-            public string name { get; set; }
-
-            [JsonPropertyName("url")]
-            public string url { get; set; }
-        }
-
-        public class Origin
-        {
-            [JsonPropertyName("name")]
-            public string name { get; set; }
-
-            [JsonPropertyName("url")]
-            public string url { get; set; }
-        }
-
-        public class Result
-        {
-            [JsonPropertyName("id")]
-            public int id { get; set; }
-
-            [JsonPropertyName("name")]
-            public string name { get; set; }
-
-            [JsonPropertyName("status")]
-            public string status { get; set; }
-
-            [JsonPropertyName("species")]
-            public string species { get; set; }
-
-            [JsonPropertyName("type")]
-            public string type { get; set; }
-
-            [JsonPropertyName("gender")]
-            public string gender { get; set; }
-
-            [JsonPropertyName("origin")]
-            public Origin origin { get; set; }
-
-            [JsonPropertyName("location")]
-            public Location location { get; set; }
-
-            [JsonPropertyName("image")]
-            public string image { get; set; }
-
-            [JsonPropertyName("episode")]
-            public List<string> episode { get; set; }
-
-            [JsonPropertyName("url")]
-            public string url { get; set; }
-
-            [JsonPropertyName("created")]
-            public DateTime created { get; set; }
-        }
-
+        [JsonPropertyName("prev")]
+        public object Prev { get; set; }
     }
 
-    // public class PersonajeAPI
-    // {
-    //     [JsonPropertyName("id")]
-    //      public int Id { get; set; }
+    public class Location
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-    //     [JsonPropertyName("name")]
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+    }
 
-    //     public string Name{ get; set;}
+    public class Origin
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-    //     [JsonPropertyName("gender")]
-    //     public string Gender{ get; set;}
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+    }
 
-    //     [JsonPropertyName("species")]
-    //     public string Species{ get; set;}
+    public class Result
+    {
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
-    //     [JsonPropertyName("location")]
-    //     public string Location{ get; set;}
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-    // }
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+
+        [JsonPropertyName("species")]
+        public string Species { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("gender")]
+        public string Gender { get; set; }
+
+        [JsonPropertyName("origin")]
+        public Origin Origin { get; set; }
+
+        [JsonPropertyName("location")]
+        public Location Location { get; set; }
+
+        [JsonPropertyName("image")]
+        public string Image { get; set; }
+
+        [JsonPropertyName("episode")]
+        public List<string> Episode { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+
+        [JsonPropertyName("created")]
+        public DateTime Created { get; set; }
+    }
+
+    public class InformacionAPI
+    {
+        [JsonPropertyName("info")]
+        public Info Info { get; set; }
+
+        [JsonPropertyName("results")]
+        public List<Result> Results { get; set; }
+    }
+    
 
     public class Personaje
     {   
@@ -168,46 +154,65 @@ namespace espacioPersonaje
     {
         
         private static readonly HttpClient client = new HttpClient();
-        private static async Task<List<PersonajeAPI>> GetPjJSONs()
+        private static async Task<InformacionAPI> GetPjJSONs()
         {
-            var url = "https://rickandmortyapi.com/api/character?page=2";
+            var url = "https://rickandmortyapi.com/api/character";
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode(); 
             string responseBody = await response.Content.ReadAsStringAsync();
-            List<PersonajeAPI> listaPersonajes = JsonSerializer.Deserialize<List<PersonajeAPI>>(responseBody);
-            return listaPersonajes;
+            InformacionAPI PersonajesAPI = JsonSerializer.Deserialize<InformacionAPI>(responseBody);
+            return PersonajesAPI;
         }
 
-        public static Personaje CrearPersonaje(List <PersonajeAPI>listaPersonajes)
+        public static Personaje CrearPersonaje( InformacionAPI PersonajesAPI)
         {
             var semilla = Environment.TickCount;
             Random random = new Random(semilla);
-            int ALE = random.Next(0,listaPersonajes.Count);
-            PersonajeAPI personajeAPI = listaPersonajes[ALE];
-            if (personajeAPI.Gender == "male")
+            int ALE = random.Next(0,PersonajesAPI.Results.Count);
+            string nombre = PersonajesAPI.Results[ALE].Name;
+            string genero = TraducirGenero(PersonajesAPI.Results[ALE].Gender);
+            string especie = PersonajesAPI.Results[ALE].Species;
+            string origen = PersonajesAPI.Results[ALE].Location.Name;
+            Datos datos = new Datos(nombre,genero,especie,origen);
+            int velocidad = random.Next(1,11);
+            int destreza=random.Next(1,6);
+            int fuerza = random.Next(1,11);
+            int nivel = random.Next(1,11);
+            int armadura = random.Next(1,101);
+            int salud = random.Next(1,101);
+            Array valores = Enum.GetValues(typeof(Arma));
+            int indiceAleatorio = random.Next(valores.Length);
+            Arma arma = (Arma)valores.GetValue(indiceAleatorio);
+            Caracteristicas caracteristicasPJ = new Caracteristicas(velocidad,destreza,fuerza,nivel,armadura,salud,arma);
+            Personaje pj = new Personaje(datos,caracteristicasPJ);
+            return pj;
+        }
+        public static string TraducirGenero(string Gender)
+        {
+            Gender.ToLower();
+            if (Gender == "male")
             {
-                personajeAPI.Gender = "masculino";
+                Gender = "Masculino";
             }else
             {
-                if (personajeAPI.Gender == "female")
+                if (Gender == "female")
                 {
-                    personajeAPI.Gender = "femenino";
+                    Gender = "Femenino";
+                }else
+                {
+                    if (Gender == "genderless")
+                    {
+                        Gender = "Sin genero";
+                    } else
+                    {
+                    
+                         Gender = "Desconocido";
+                        
+                    }
                 }
             }
-            Datos datos = new Datos(personajeAPI.Name,personajeAPI.Gender,personajeAPI.Species,personajeAPI.Location);
-
-            int velocidad = random.Next(1,11);                     //1 a 10
-            int destreza=random.Next(1,6);                        //1 a 5
-            int fuerza = random.Next(1,11);                       //1 a 10
-            int nivel = random.Next(1,11);                       //1 a 10
-            int armadura = random.Next(1,101);                  //1 a 100 
-            int salud = random.Next(1,101);                     //1 a 100
-            int indiceArma = random.Next(0,4);
-            
+            return Gender;
         }
     }
 
 }
-
-
-
