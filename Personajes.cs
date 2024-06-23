@@ -164,12 +164,13 @@ namespace espacioPersonaje
             return PersonajesAPI;
         }
 
-        public static Personaje CrearPersonaje( InformacionAPI PersonajesAPI)
+        public static Personaje CrearPersonajeAleatorio( InformacionAPI PersonajesAPI)
         {
             var semilla = Environment.TickCount;
             Random random = new Random(semilla);
             int ALE = random.Next(0,PersonajesAPI.Results.Count);
             string nombre = PersonajesAPI.Results[ALE].Name;
+            PersonajesAPI.Results[ALE].Gender.ToLower();
             string genero = TraducirGenero(PersonajesAPI.Results[ALE].Gender);
             string especie = PersonajesAPI.Results[ALE].Species;
             string origen = PersonajesAPI.Results[ALE].Location.Name;
@@ -184,23 +185,78 @@ namespace espacioPersonaje
             int indiceAleatorio = random.Next(valores.Length);
             Arma arma = (Arma)valores.GetValue(indiceAleatorio);
             Caracteristicas caracteristicasPJ = new Caracteristicas(velocidad,destreza,fuerza,nivel,armadura,salud,arma);
-            Personaje pj = new Personaje(datos,caracteristicasPJ);
-            return pj;
+            Personaje personajeAleatorio = new Personaje(datos,caracteristicasPJ);
+            return personajeAleatorio;
         }
+
+        public static Personaje personajePrincipal()
+        {
+            var semilla = Environment.TickCount;
+            Random random = new Random(semilla);
+            string nombrePJ;
+            do
+            {
+                Console.WriteLine("Ingresa el nombre de tu personaje");
+                nombrePJ= Console.ReadLine();
+            } while (nombrePJ != null);
+            
+             
+            string generoPJ ;
+            do
+            {
+                Console.WriteLine("Ingresa su genero(F= femenino , M= masculino , S= Sin genero)");
+                generoPJ = Console.ReadLine();
+                generoPJ.ToUpper();
+                if (generoPJ != "F" || generoPJ !="S" || generoPJ != "M")
+                {
+                    Console.WriteLine("Error, por favor ingrese un caracter valido!");
+                }
+
+            } while (generoPJ != "F" || generoPJ !="S" || generoPJ != "M" );
+            generoPJ = TraducirGenero(generoPJ);   
+            string especiePJ;
+            do
+            {
+                Console.WriteLine("Ingresa su especie:");
+                especiePJ = Console.ReadLine();
+            } while (especiePJ != null);
+            string origenPJ;
+            do
+            {
+                Console.WriteLine("ingresa su planeta de origen:");
+                origenPJ = Console.ReadLine();
+            } while (origenPJ != null);
+
+            Datos datosPJ = new Datos(nombrePJ,generoPJ,especiePJ,origenPJ);
+             int velocidadPJ = random.Next(1,11);
+            int destrezaPJ=random.Next(1,6);
+            int fuerzaPJ = random.Next(1,11);
+            int nivelPJ = random.Next(1,11);
+            int armaduraPJ = random.Next(1,101);
+            int saludPJ = random.Next(1,101);
+            Array valores = Enum.GetValues(typeof(Arma));
+            int indiceAleatorio = random.Next(valores.Length);
+            Arma arma = (Arma)valores.GetValue(indiceAleatorio);
+            Caracteristicas caracteristicasPJ = new Caracteristicas(velocidadPJ,destrezaPJ,fuerzaPJ,nivelPJ,armaduraPJ,saludPJ,arma);
+            Personaje personajePrincipal = new Personaje(datosPJ,caracteristicasPJ); 
+            return personajePrincipal;  
+        }
+
+        
         public static string TraducirGenero(string Gender)
         {
-            Gender.ToLower();
-            if (Gender == "male")
+            
+            if (Gender == "male" || Gender == "M")
             {
                 Gender = "Masculino";
             }else
             {
-                if (Gender == "female")
+                if (Gender == "female"|| Gender == "F")
                 {
                     Gender = "Femenino";
                 }else
                 {
-                    if (Gender == "genderless")
+                    if (Gender == "genderless" || Gender == "S")
                     {
                         Gender = "Sin genero";
                     } else

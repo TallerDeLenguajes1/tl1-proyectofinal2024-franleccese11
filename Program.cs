@@ -4,16 +4,23 @@ using System.Text.Json.Serialization;
 using System.Net.Http;
 using System.Threading.Tasks;
 using espacioPersonaje;
-Console.WriteLine("Hello, World!");
-HttpClient client = new HttpClient();
-var url = "https://rickandmortyapi.com/api/character";
-HttpResponseMessage response = await client.GetAsync(url);
-response.EnsureSuccessStatusCode(); 
-string responseBody = await response.Content.ReadAsStringAsync();
-InformacionAPI PersonajesAPI = JsonSerializer.Deserialize<InformacionAPI>(responseBody);
-var semilla = Environment.TickCount;
-Random random = new Random(semilla);
 
+
+
+
+//   private string nombre;
+//         private string genero;
+//         private string especie;
+
+//         private string origen;
+//         private int velocidad;   //1 a 10
+//         private int destreza;   //1 a 5
+//         private int fuerza;  //1 a 10
+
+//         private int nivel; //1 a 10
+//         private int armadura; //1 a 100
+//         private int salud; //1 a 100
+//         private Arma arma;
  for (int i = 0; i < 10; i++)
  {
      Array valores = Enum.GetValues(typeof(Arma));
