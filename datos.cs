@@ -2,7 +2,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using espacioPersonaje;
 
-namespace datos
+
+namespace espacioDatos
 {
     public class PersonajesJson
     {
@@ -64,7 +65,7 @@ namespace datos
             }
         }
 
-    
+
 
 
     }
