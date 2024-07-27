@@ -29,11 +29,8 @@ namespace espacioDatos
                 {
                     string listaPersonajesJson = strReader.ReadToEnd();
                     archivo.Close();
-
                     Console.WriteLine("lista de personajes encontrada con exito!");
-
                     List <Personaje>listaPersonajes = JsonSerializer.Deserialize<List<Personaje>>(listaPersonajesJson);
-
                     return listaPersonajes;
                 }
             }
@@ -50,7 +47,7 @@ namespace espacioDatos
                         string listaPersonajesJson = StrReader.ReadToEnd();
                         archivo.Close();
 
-                        if (listaPersonajesJson != null)
+                        if (string.IsNullOrEmpty(listaPersonajesJson)!= true)
                         {
                             return true; //tiene datos y existe 
                         }else
@@ -64,9 +61,81 @@ namespace espacioDatos
                 return false; //no existe el archivo
             }
         }
+    }
+
+
+    public class personajeGanador(Personaje pj,DateTime hoy)
+    {
+        private Personaje personaje =  pj;
+        DateTime hoy = hoy;
+        public Personaje Personaje { get => personaje; set => personaje = value; }
+        public DateTime Hoy { get => hoy; set => hoy = value; }
+    }
+
+
+    public class historialJSON
+    {
+        public static void GuardarGanador(personajeGanador personajeGanador, string nombreArchivo)
+        {
+            List <personajeGanador> ListaPersonajesGanadores = LeerGanadores(nombreArchivo);
+            ListaPersonajesGanadores.Add(personajeGanador);
+            string listaPersonajesGanadoresJSON = JsonSerializer.Serialize(ListaPersonajesGanadores);
+            using (FileStream Archivo = new FileStream(nombreArchivo,FileMode.Create))
+            {
+                using(StreamWriter StrWriter = new StreamWriter(Archivo))
+                {
+                    StrWriter.WriteLine("{0}", listaPersonajesGanadoresJSON);
+                    StrWriter.Close();
+                }
+            }
+        }
+
+        public static List <personajeGanador> LeerGanadores(string nombreArchivo)
+        {
+            if(!Existe(nombreArchivo))
+            {
+                return new List<personajeGanador>();
+            }
+            using (FileStream Archivo = new FileStream(nombreArchivo,FileMode.Open))
+            {
+                using(StreamReader StrReader = new StreamReader(Archivo))
+                {
+                    string personajesGanadoresJSON = StrReader.ReadToEnd();
+                    Archivo.Close();
+                    List <personajeGanador> ListaPersonajesGanadores = JsonSerializer.Deserialize<List<personajeGanador>>(personajesGanadoresJSON);
+                    return ListaPersonajesGanadores;
+
+                }
+            }
+        }
 
 
 
 
+        public static bool Existe(string NombreArchivo)
+        {
+            if(File.Exists(NombreArchivo))
+            {
+                using (FileStream Archivo = new FileStream(NombreArchivo,FileMode.Open))
+                {
+                    using (StreamReader StrReader = new StreamReader(Archivo))
+                    {
+                        string listaPersonajesJson = StrReader.ReadToEnd();
+                        Archivo.Close();
+
+                        if(string.IsNullOrEmpty(listaPersonajesJson)!= true)
+                        {
+                            return true;
+                        }else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }else
+            {
+                return false;
+            }
+        }   
     }
 }

@@ -19,6 +19,7 @@ asciiGame.EscribirTitulo(35,5);
 // Console.SetCursorPosition(limiteSuperior.X + 5,limiteSuperior.Y+3);
 // Ascii.dibujar(Ascii.titulo,0);
 asciiGame.DibujarPortada(35,13);
+
 Console.ReadKey();
 
 
