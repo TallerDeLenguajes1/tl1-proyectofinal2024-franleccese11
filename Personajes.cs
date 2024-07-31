@@ -153,6 +153,7 @@ namespace espacioPersonaje
     public class FabricaDePersonajes
     {
         
+        
         private static readonly HttpClient client = new HttpClient();
         private static async Task<InformacionAPI> GetPjJSONs()
         {
@@ -215,17 +216,23 @@ namespace espacioPersonaje
             } while (generoPJ != "F" || generoPJ !="S" || generoPJ != "M" );
             generoPJ = TraducirGenero(generoPJ);   
             string especiePJ;
-            do
+            
+            Console.WriteLine("Ingresa su especie: (Presiona ENTER para seleccionar una especie aleatoria)");
+            especiePJ = Console.ReadLine();
+            if (string.IsNullOrEmpty(especiePJ))
             {
-                Console.WriteLine("Ingresa su especie:");
-                especiePJ = Console.ReadLine();
-            } while (especiePJ != null);
+                especiePJ = EspecieAleatoria(especiePJ);
+                Console.WriteLine("Tu especie es:"+especiePJ);  
+            }
+
             string origenPJ;
-            do
+            Console.WriteLine("ingresa su planeta de origen:(Presiona ENTER para seleccionar un planeta aleatorio)");
+            origenPJ = Console.ReadLine();
+            if (string.IsNullOrEmpty(origenPJ))
             {
-                Console.WriteLine("ingresa su planeta de origen:");
-                origenPJ = Console.ReadLine();
-            } while (origenPJ != null);
+                origenPJ= EspecieAleatoria(especiePJ);
+                Console.WriteLine("Tu origen es:"+origenPJ);  
+            }
 
             Datos datosPJ = new Datos(nombrePJ,generoPJ,especiePJ,origenPJ);
              int velocidadPJ = random.Next(1,11);
@@ -269,6 +276,28 @@ namespace espacioPersonaje
             }
             return Gender;
         }
+
+        public static string EspecieAleatoria(string especieAleatoria)
+        {
+            string[] ArrayEspecies= {"Borpociano","Cromulon","Cronenberg","Fleeb","Meeseek","Robodrilo","Kozbiano","Gromflomito"};
+            var semilla = Environment.TickCount;
+            Random random = new Random(semilla);
+            int indiceAleatorio = random.Next(ArrayEspecies.Length);
+            especieAleatoria = ArrayEspecies[indiceAleatorio];
+            return(especieAleatoria);
+        }
+
+        public static string OrigenAleatorio(string origenAleatorio)
+        {
+            string[] ArrayOrigen= {"41-Kepler B","Alpha Centaurus","Planet Squanch","Snake Planet","Gaia","Jupiter","Venus"};
+            var semilla = Environment.TickCount;
+            Random random = new Random(semilla);
+            int indiceAleatorio = random.Next(ArrayOrigen.Length);
+            origenAleatorio = ArrayOrigen[indiceAleatorio];
+            return(origenAleatorio);
+        }
+
+
     }
 
 }
