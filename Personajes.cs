@@ -155,7 +155,8 @@ namespace espacioPersonaje
         
         
         private static readonly HttpClient client = new HttpClient();
-        private static async Task<InformacionAPI> GetPjJSONs()
+        
+        public static async Task<InformacionAPI> GetPjJSONs()
         {
             var url = "https://rickandmortyapi.com/api/character";
             HttpResponseMessage response = await client.GetAsync(url);
@@ -164,7 +165,7 @@ namespace espacioPersonaje
             InformacionAPI PersonajesAPI = JsonSerializer.Deserialize<InformacionAPI>(responseBody);
             return PersonajesAPI;
         }
-
+        
         public static Personaje CrearPersonajeAleatorio( InformacionAPI PersonajesAPI)
         {
             var semilla = Environment.TickCount;

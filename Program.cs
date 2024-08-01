@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Reflection.Metadata;
 using System.Text;
 using espacioMenu;
+using espacioJuego;
 
 Point limiteSuperior = new Point(2,2);
 Point limiteInferior = new Point(197,47);
@@ -25,9 +26,11 @@ string frase=" Bienvenido retador! ¿Que te gustaria hacer?";
 string []opciones = { "Jugar","Historial","Acerca del juego","Salir"};
 Menu MenuPrincipal = new Menu(frase,opciones);
 int indiceSelec= MenuPrincipal.Run(5,37);
+Juego juego = new Juego();
 switch (indiceSelec)
 {
     case 0:
+       await Juego.Jugar(ventana);
         break;
     case 1:
         break;

@@ -103,16 +103,7 @@ namespace espacioASCII
            
         };
 
-        public static void Escribir(string Texto, int Velocidad)
-        {
-        foreach (char Letra in Texto)
-        {
-            Console.Write(Letra);
-            Thread.Sleep(Velocidad); 
-        }
-        Console.WriteLine(); 
-        }
-
+        /*
         public static void dibujar(string[] dibujo,int velocidad)
         {
             foreach (string linea in dibujo)
@@ -120,6 +111,6 @@ namespace espacioASCII
                 Escribir(linea,velocidad);
             }
             Console.WriteLine();
-        }
+        }*/
     }
 }
