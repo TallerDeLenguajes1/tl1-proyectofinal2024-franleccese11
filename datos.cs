@@ -14,13 +14,14 @@ namespace espacioDatos
             {
                 using (StreamWriter strWriter = new StreamWriter(archivo))
                 {
-                    strWriter.WriteLine("{0}",listaPersonajesJson);
+                    strWriter.WriteLine(listaPersonajesJson);
+                    strWriter.Flush();
                     strWriter.Close();
                     Console.WriteLine("personajes guardados exitosamente!");
                 }
             }
         }
-
+// "{0}",
         public static List<Personaje> LeerPersonajes(string nombreArchivo)
         {
             using (FileStream archivo = new FileStream(nombreArchivo,FileMode.Open))

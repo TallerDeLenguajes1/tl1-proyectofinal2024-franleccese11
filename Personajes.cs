@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace espacioPersonaje 
 {
-    public enum Arma
-    {
-        Espada,
-		Neutrogun,
-		Portalgun,
-		Exoesqueleto
-    }
+    // public enum Arma
+    // {
+    //     Espada,
+	// 	Neutrogun,
+	// 	Portalgun,
+	// 	Exoesqueleto
+    // }
 
      public class Info
     {
@@ -98,24 +98,41 @@ namespace espacioPersonaje
 
     public class Personaje
     {   
-        private Datos datos;
-        private Caracteristicas caracteristicas;
+
+        [JsonPropertyName("datos")]
+        public Datos Datos { get; set; }
+    
+        [JsonPropertyName("caracteristicas")]
+        public Caracteristicas Caracteristicas { get; set; }
+        public Datos datos;
+        public Caracteristicas caracteristicas;
 
         public Personaje(Datos datos,Caracteristicas caracteristicas)
         {
             this.caracteristicas = caracteristicas;
             this.datos = datos;
         }
+
     }
 
     public class Datos
     {
-        
-        private string nombre;
-        private string genero;
-        private string especie;
+        [JsonPropertyName("nombre")]
+        public string Nombre { get; set; }
 
-        private string origen;
+        [JsonPropertyName("genero")]
+        public string Genero { get; set; }
+
+        [JsonPropertyName("especie")]
+        public string Especie { get; set; }
+
+        [JsonPropertyName("origen")]
+        public string Origen { get; set; }
+        public string nombre;
+        public string genero;
+        public string especie;
+
+        public string origen;
 
         public Datos(string nombre,string genero,string especie,string origen)
         {
@@ -129,16 +146,38 @@ namespace espacioPersonaje
 
     public class Caracteristicas
     {
-        private int velocidad;   //1 a 10
-        private int destreza;   //1 a 5
-        private int fuerza;  //1 a 10
 
-        private int nivel; //1 a 10
-        private int armadura; //1 a 100
-        private int salud; //1 a 100
-        private Arma arma;
+        [JsonPropertyName("velocidad")]
+        public int Velocidad { get; set; }
 
-        public Caracteristicas(int velocidad,int destreza,int fuerza,int nivel,int armadura,int salud,Arma arma)
+        [JsonPropertyName("destreza")]
+        public int Destreza { get; set; }
+
+        [JsonPropertyName("fuerza")]
+        public int Fuerza { get; set; }
+
+        [JsonPropertyName("nivel")]
+        public int Nivel { get; set; }
+
+        [JsonPropertyName("armadura")]
+        public int Armadura { get; set; }
+
+        [JsonPropertyName("salud")]
+        public int Salud { get; set; }
+
+       
+        
+
+        public int velocidad;   //1 a 10
+        public int destreza;   //1 a 5
+        public int fuerza;  //1 a 10
+
+        public int nivel; //1 a 10
+        public int armadura; //1 a 100
+        public int salud; //1 a 100
+       
+
+        public Caracteristicas(int velocidad,int destreza,int fuerza,int nivel,int armadura,int salud)
         {
             this.velocidad = velocidad;
             this.destreza = destreza;
@@ -146,26 +185,12 @@ namespace espacioPersonaje
             this.nivel = nivel;
             this.armadura = armadura;
             this.salud = salud;
-            this.arma = arma;
+            
         }
     }
 
     public class FabricaDePersonajes
     {
-        
-        
-        private static readonly HttpClient client = new HttpClient();
-        
-        public static async Task<InformacionAPI> GetPjJSONs()
-        {
-            var url = "https://rickandmortyapi.com/api/character";
-            HttpResponseMessage response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode(); 
-            string responseBody = await response.Content.ReadAsStringAsync();
-            InformacionAPI PersonajesAPI = JsonSerializer.Deserialize<InformacionAPI>(responseBody);
-            return PersonajesAPI;
-        }
-        
         public static Personaje CrearPersonajeAleatorio( InformacionAPI PersonajesAPI)
         {
             var semilla = Environment.TickCount;
@@ -176,18 +201,16 @@ namespace espacioPersonaje
             string genero = TraducirGenero(PersonajesAPI.Results[ALE].Gender);
             string especie = PersonajesAPI.Results[ALE].Species;
             string origen = PersonajesAPI.Results[ALE].Location.Name;
-            Datos datos = new Datos(nombre,genero,especie,origen);
+            PersonajesAPI.Results.Remove(PersonajesAPI.Results[ALE]);
+            Datos datosPJ = new Datos(nombre,genero,especie,origen);
             int velocidad = random.Next(1,11);
             int destreza=random.Next(1,6);
             int fuerza = random.Next(1,11);
             int nivel = random.Next(1,11);
             int armadura = random.Next(1,101);
             int salud = random.Next(1,101);
-            Array valores = Enum.GetValues(typeof(Arma));
-            int indiceAleatorio = random.Next(valores.Length);
-            Arma arma = (Arma)valores.GetValue(indiceAleatorio);
-            Caracteristicas caracteristicasPJ = new Caracteristicas(velocidad,destreza,fuerza,nivel,armadura,salud,arma);
-            Personaje personajeAleatorio = new Personaje(datos,caracteristicasPJ);
+            Caracteristicas caracteristicasPJ = new Caracteristicas(velocidad,destreza,fuerza,nivel,armadura,salud);
+            Personaje personajeAleatorio = new Personaje(datosPJ,caracteristicasPJ);
             return personajeAleatorio;
         }
 
@@ -242,10 +265,8 @@ namespace espacioPersonaje
             int nivelPJ = random.Next(1,11);
             int armaduraPJ = random.Next(1,101);
             int saludPJ = random.Next(1,101);
-            Array valores = Enum.GetValues(typeof(Arma));
-            int indiceAleatorio = random.Next(valores.Length);
-            Arma arma = (Arma)valores.GetValue(indiceAleatorio);
-            Caracteristicas caracteristicasPJ = new Caracteristicas(velocidadPJ,destrezaPJ,fuerzaPJ,nivelPJ,armaduraPJ,saludPJ,arma);
+            
+            Caracteristicas caracteristicasPJ = new Caracteristicas(velocidadPJ,destrezaPJ,fuerzaPJ,nivelPJ,armaduraPJ,saludPJ);
             Personaje personajePrincipal = new Personaje(datosPJ,caracteristicasPJ); 
             return personajePrincipal;  
         }

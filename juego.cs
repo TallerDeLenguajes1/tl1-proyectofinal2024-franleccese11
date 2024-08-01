@@ -1,4 +1,4 @@
-using System.Text.Json;
+/*using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -26,7 +26,8 @@ namespace espacioJuego
             if (PersonajesJson.Existe(nombreArchivo))
             {
                 personajes = PersonajesJson.LeerPersonajes(nombreArchivo);
-                Console.WriteLine("Personajes cargados exitosamente desde el archivo existente!");
+                Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde el archivo existente!"],ventana.LimiteSuperior,5,0);
+                
             }else
             {
                 InformacionAPI personajesAPI = await FabricaDePersonajes.GetPjJSONs();
@@ -37,9 +38,11 @@ namespace espacioJuego
                     personajes.Add(FabricaDePersonajes.CrearPersonajeAleatorio( personajesAPI));
                 }
                 PersonajesJson.GuardarPersonajes(personajes,nombreArchivo);
-                Console.WriteLine("Personajes cargados exitosamente desde la API!");
+                Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde la API!"],ventana.LimiteSuperior,5,0);
+                Console.ReadKey();
             }
 
         }
     }
 }
+*/

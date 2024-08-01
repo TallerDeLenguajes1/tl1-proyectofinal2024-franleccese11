@@ -8,6 +8,9 @@ namespace espacioConsola
         private Point limiteSuperior;
         private Point limiteInferior;
 
+        public Point LimiteSuperior { get => limiteSuperior;}
+        public Point LimiteInferior { get => limiteInferior;}
+
         public Ventana(int ancho,int largo,Point limiteSuperior,Point limiteInferior)
         {
             this.ancho = ancho;
