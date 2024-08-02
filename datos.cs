@@ -9,19 +9,18 @@ namespace espacioDatos
     {
         public static void GuardarPersonajes(List<Personaje>listaPersonajes,string nombreArchivo)
         {
-            string listaPersonajesJson = JsonSerializer.Serialize(listaPersonajes);
+            var listaPersonajesJson = JsonSerializer.Serialize(listaPersonajes);
             using (FileStream archivo = new FileStream(nombreArchivo,FileMode.Create))
             {
                 using (StreamWriter strWriter = new StreamWriter(archivo))
                 {
-                    strWriter.WriteLine(listaPersonajesJson);
+                    strWriter.WriteLine("{0}", listaPersonajesJson);
                     strWriter.Flush();
                     strWriter.Close();
-                    Console.WriteLine("personajes guardados exitosamente!");
                 }
             }
         }
-// "{0}",
+// 
         public static List<Personaje> LeerPersonajes(string nombreArchivo)
         {
             using (FileStream archivo = new FileStream(nombreArchivo,FileMode.Open))
@@ -29,9 +28,9 @@ namespace espacioDatos
                 using (StreamReader strReader = new StreamReader(archivo))
                 {
                     string listaPersonajesJson = strReader.ReadToEnd();
-                    archivo.Close();
-                    Console.WriteLine("lista de personajes encontrada con exito!");
+                    
                     List <Personaje>listaPersonajes = JsonSerializer.Deserialize<List<Personaje>>(listaPersonajesJson);
+                    archivo.Close();
                     return listaPersonajes;
                 }
             }

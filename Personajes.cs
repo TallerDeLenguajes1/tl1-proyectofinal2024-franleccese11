@@ -2,8 +2,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-
+using espacioDialogos;
+using espacioConsola;
+using System.Drawing;
 namespace espacioPersonaje 
 {
     // public enum Arma
@@ -104,13 +105,11 @@ namespace espacioPersonaje
     
         [JsonPropertyName("caracteristicas")]
         public Caracteristicas Caracteristicas { get; set; }
-        public Datos datos;
-        public Caracteristicas caracteristicas;
 
         public Personaje(Datos datos,Caracteristicas caracteristicas)
         {
-            this.caracteristicas = caracteristicas;
-            this.datos = datos;
+            Caracteristicas = caracteristicas;
+            Datos = datos;
         }
 
     }
@@ -128,18 +127,14 @@ namespace espacioPersonaje
 
         [JsonPropertyName("origen")]
         public string Origen { get; set; }
-        public string nombre;
-        public string genero;
-        public string especie;
-
-        public string origen;
+        
 
         public Datos(string nombre,string genero,string especie,string origen)
         {
-            this.nombre = nombre;
-            this.genero = genero;
-            this.especie = especie;
-            this.origen = origen;
+            Nombre = nombre;
+            Genero = genero;
+            Especie = especie;
+            Origen = origen;
         }
     }
 
@@ -166,26 +161,15 @@ namespace espacioPersonaje
         public int Salud { get; set; }
 
        
-        
-
-        public int velocidad;   //1 a 10
-        public int destreza;   //1 a 5
-        public int fuerza;  //1 a 10
-
-        public int nivel; //1 a 10
-        public int armadura; //1 a 100
-        public int salud; //1 a 100
-       
 
         public Caracteristicas(int velocidad,int destreza,int fuerza,int nivel,int armadura,int salud)
         {
-            this.velocidad = velocidad;
-            this.destreza = destreza;
-            this.fuerza = fuerza;
-            this.nivel = nivel;
-            this.armadura = armadura;
-            this.salud = salud;
-            
+            Velocidad = velocidad;
+            Destreza = destreza;
+            Fuerza = fuerza;
+            Nivel = nivel;
+            Armadura = armadura;
+            Salud = salud;
         }
     }
 
@@ -216,46 +200,50 @@ namespace espacioPersonaje
 
         public static Personaje personajePrincipal()
         {
+            int yref;
+            Point limiteInferior =new Point(197,47);
             var semilla = Environment.TickCount;
             Random random = new Random(semilla);
             string nombrePJ;
             do
             {
-                Console.WriteLine("Ingresa el nombre de tu personaje");
+                 yref = Dialogos.EscribirCentrado(["Ingresa el nombre de tu personaje: "],limiteInferior,5,0);
                 nombrePJ= Console.ReadLine();
-            } while (nombrePJ != null);
+            } while (nombrePJ == null);
             
              
             string generoPJ ;
             do
             {
-                Console.WriteLine("Ingresa su genero(F= femenino , M= masculino , S= Sin genero)");
+                yref = Dialogos.EscribirCentrado(["Ingresa su genero(F= femenino , M= masculino , S= Sin genero):  "],limiteInferior,yref,0);
                 generoPJ = Console.ReadLine();
                 generoPJ.ToUpper();
-                if (generoPJ != "F" || generoPJ !="S" || generoPJ != "M")
+                if (generoPJ != "F" && generoPJ !="S" && generoPJ != "M")
                 {
-                    Console.WriteLine("Error, por favor ingrese un caracter valido!");
+                    yref = Dialogos.EscribirCentrado(["Error, por favor ingrese un caracter valido!" ],limiteInferior,yref,0);
+                    Console.WriteLine();
                 }
 
-            } while (generoPJ != "F" || generoPJ !="S" || generoPJ != "M" );
+            } while (generoPJ != "F" && generoPJ !="S" && generoPJ != "M" );
             generoPJ = TraducirGenero(generoPJ);   
-            string especiePJ;
             
-            Console.WriteLine("Ingresa su especie: (Presiona ENTER para seleccionar una especie aleatoria)");
+
+            string especiePJ;
+            yref = Dialogos.EscribirCentrado(["Ingresa su especie: (Presiona ENTER para seleccionar una especie aleatoria):  " ],limiteInferior,yref,0);
             especiePJ = Console.ReadLine();
             if (string.IsNullOrEmpty(especiePJ))
             {
                 especiePJ = EspecieAleatoria(especiePJ);
-                Console.WriteLine("Tu especie es:"+especiePJ);  
+                yref = Dialogos.EscribirCentrado(["Tu especie es: "+especiePJ],limiteInferior,yref,0);
             }
 
             string origenPJ;
-            Console.WriteLine("ingresa su planeta de origen:(Presiona ENTER para seleccionar un planeta aleatorio)");
+            yref = Dialogos.EscribirCentrado(["ingresa su planeta de origen:(Presiona ENTER para seleccionar un planeta aleatorio):  "],limiteInferior,yref,0);
             origenPJ = Console.ReadLine();
             if (string.IsNullOrEmpty(origenPJ))
             {
                 origenPJ= EspecieAleatoria(especiePJ);
-                Console.WriteLine("Tu origen es:"+origenPJ);  
+                yref = Dialogos.EscribirCentrado(["Tu origen es: "+origenPJ],limiteInferior,yref,0);  
             }
 
             Datos datosPJ = new Datos(nombrePJ,generoPJ,especiePJ,origenPJ);

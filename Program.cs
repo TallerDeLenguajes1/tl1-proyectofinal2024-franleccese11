@@ -27,17 +27,10 @@ Point limiteSuperior = new Point(2,2);
 Point limiteInferior = new Point(197,47);
 Ventana ventana = new Ventana(200,50,limiteSuperior,limiteInferior);
 ventana.DibujarMarco();
-AsciiJuego asciiGame = new AsciiJuego();
-asciiGame.EscribirTitulo(35,5);
+AsciiJuego.EscribirTitulo(35,5);
 // Console.SetCursorPosition(limiteSuperior.X + 5,limiteSuperior.Y+3);
 // Ascii.dibujar(Ascii.titulo,0);
-asciiGame.DibujarPortada(35,13);
-
-Console.WriteLine(PersonajesAPI.Info.Pages);
-foreach ( Result item in PersonajesAPI.Results)
-{
-    Console.WriteLine(item.Name);
-}
+AsciiJuego.DibujarPortada(35,13);
 string frase=" Bienvenido retador! ¿Que te gustaria hacer?";
 string []opciones = { "Jugar","Historial","Acerca del juego","Salir"};
 Menu MenuPrincipal = new Menu(frase,opciones);
@@ -46,7 +39,10 @@ int indiceSelec= MenuPrincipal.Run(5,37);
 switch (indiceSelec)
 {
     case 0:
-       Jugar(ventana,PersonajesAPI);
+       PersistenciaDatosPersonajes(ventana,PersonajesAPI);
+       CrearPJprincipal( ventana, PersonajesAPI);
+       Console.ReadKey();
+
         break;
     case 1:
         break;
@@ -60,7 +56,7 @@ switch (indiceSelec)
 Console.ReadKey();
 
 
-static void Jugar(Ventana ventana,InformacionAPI PersonajesAPI)
+static void PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI PersonajesAPI)
         {
             Console.Clear();
             ventana.DibujarMarco();
@@ -71,9 +67,7 @@ static void Jugar(Ventana ventana,InformacionAPI PersonajesAPI)
                 for (int i = 0; i < 9; i++)
                 {
                     Personaje pjALE = FabricaDePersonajes.CrearPersonajeAleatorio(PersonajesAPI);
-                    ListaPersonajes.Add(pjALE);
-                    Console.WriteLine(ListaPersonajes[i].datos.nombre);
-                    
+                    ListaPersonajes.Add(pjALE);     
                 }
                 if (ListaPersonajes == null)
                     {
@@ -84,27 +78,36 @@ static void Jugar(Ventana ventana,InformacionAPI PersonajesAPI)
                 //     // Console.WriteLine(item.datos.genero);
 
                 // }
-            Console.WriteLine(ListaPersonajes[1].datos.nombre);
-            Console.WriteLine(ListaPersonajes[8].datos.genero);
             PersonajesJson.GuardarPersonajes(ListaPersonajes,nombreArchivo);
-            Personaje personajePrincipal;
+            
+            int Yref;
             if (PersonajesJson.Existe(nombreArchivo))
             {
                 ListaPersonajes = PersonajesJson.LeerPersonajes(nombreArchivo);
-                Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde el archivo existente!"],ventana.LimiteInferior,5,0);
+                 Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde el archivo existente!"],ventana.LimiteInferior,5,0);
                 
             }else
             {
                 PersonajesJson.GuardarPersonajes(ListaPersonajes,nombreArchivo);
-                Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde la API!"],ventana.LimiteInferior,5,0);
+                Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde la API!"],ventana.LimiteInferior,5,0);
                 Console.ReadKey();
             }
-
+           Yref =  Dialogos.EscribirCentrado(Dialogos.introduccion,ventana.LimiteInferior,Yref,50);
+           Yref = Dialogos.EscribirCentrado(Dialogos.DialogoIntroduccion,ventana.LimiteInferior,Yref,0); //50
+           AsciiJuego.EscribirTitulo(35,Yref+2);
+           Yref = Dialogos.EscribirCentrado( ["Antes de comenzar tu aventura, por favor crea tu personaje","presiona una tecla para continuar"],ventana.LimiteInferior,42,50);
+            Console.ReadKey();
         }
 
 
-
-
+static Personaje CrearPJprincipal(Ventana ventana,InformacionAPI PersonajesAPI)
+{
+    Console.Clear();
+    ventana.DibujarMarco();
+    Personaje personajePrincipal = FabricaDePersonajes.personajePrincipal();
+    return personajePrincipal;
+    
+}
 
 
 

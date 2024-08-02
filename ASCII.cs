@@ -1,7 +1,7 @@
 using System.Drawing;
 namespace espacioASCII
 {
-    public class AsciiJuego
+    public static class AsciiJuego
     {
         public static string[] titulo = new string[]
         {
@@ -17,7 +17,7 @@ namespace espacioASCII
             "
         };
 
-        public void EscribirTitulo(int x, int y)
+        public static void EscribirTitulo(int x, int y)
         {
             Console.SetCursorPosition(x,y);
             Console.Write(@"    ____  _      __      ___              __   __  ___           __           __          __  __  __ ");
@@ -34,7 +34,7 @@ namespace espacioASCII
         
         }
 
-        public void DibujarPortada(int x,int y)
+        public static void DibujarPortada(int x,int y)
         {
             Console.SetCursorPosition(x,y);
             Console.Write(@"                .   ,- wubba lubba dub dub!");
