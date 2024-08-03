@@ -1,4 +1,5 @@
 using System.Drawing;
+using espacioPersonaje;
 namespace espacioASCII
 {
     public static class AsciiJuego
@@ -132,14 +133,86 @@ namespace espacioASCII
            
         };
 
-        /*
-        public static void dibujar(string[] dibujo,int velocidad)
+    public static string[] marco = new string[]
+    {
+        @"
+        ╒═══════════════════════════╕
+        │                           │
+        │                           │
+        │                           │
+        │                           │                                       
+        │                           │
+        │                           │                                 
+        │                           │
+        │                           │
+        │                           │
+        │                           │
+        │                           │
+        │                           │                               
+        ╘═══════════════════════════╛ 
+        "
+    };
+
+    public static string[] versus = new string[]
+    {
+        @"
+                    
+ __     ______  
+ \ \   / / ___| 
+  \ \ / /\___ \ 
+   \ V /  ___) |
+    \_/  |____/   
+        "
+    };
+
+        public static void DibujarMarcoDePelea(int x,int y)
         {
-            foreach (string linea in dibujo)
-            {
-                Escribir(linea,velocidad);
-            }
-            Console.WriteLine();
-        }*/
+            Console.SetCursorPosition(x,y);
+            Console.Write(@"╒═══════════════════════════╕");
+            Console.SetCursorPosition(x,y+1);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+2);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+3);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+4);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+5);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+6);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+7);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+8);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+9);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+10);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+11);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+12);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+13);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+14);
+            Console.Write(@"╘═══════════════════════════╛");
+        }
+
+        public static void DibujarVersus(int x,int y)
+        {
+            Console.SetCursorPosition(x,y+1);
+            Console.Write(@" __     ______");
+            Console.SetCursorPosition(x,y+2);
+            Console.Write(@" \ \   / / ___|");
+            Console.SetCursorPosition(x,y+3);
+            Console.Write(@"  \ \ / /\___ \");
+            Console.SetCursorPosition(x,y+4);
+            Console.Write(@"   \ V /  ___) |");
+            Console.SetCursorPosition(x,y+5);
+            Console.Write(@"    \_/  |____/");
+        }
     }
+
+
 }

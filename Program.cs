@@ -37,7 +37,10 @@ int indiceSelec= MenuPrincipal.Run(5,37);
 switch (indiceSelec)
 {
     case 0:
-        PersistenciaDatosPersonajes(ventana,PersonajesAPI);
+         List <Personaje> ListaPersonajes = new List<Personaje>();
+        ListaPersonajes = PersistenciaDatosPersonajes(ventana,PersonajesAPI);
+        Combate(ventana,ListaPersonajes[1],ListaPersonajes[2]);
+        Console.ReadKey();
         Personaje personajePrincipal = CrearPJprincipal(ventana, PersonajesAPI);
         Console.ReadKey();
         Console.Clear();
@@ -72,7 +75,72 @@ switch (indiceSelec)
 Console.ReadKey();
 
 
-static void PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI PersonajesAPI)
+static List <Personaje> PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI PersonajesAPI)
+{
+    Console.Clear();
+    ventana.DibujarMarco();
+    string nombreArchivo = "personajes.json";
+    List <Personaje> ListaPersonajes;
+    ListaPersonajes = new List<Personaje>();       
+    int Yref;
+    if (PersonajesJson.Existe(nombreArchivo))
+    {
+        ListaPersonajes = PersonajesJson.LeerPersonajes(nombreArchivo);
+        if (ListaPersonajes == null)
+        {
+            Console.WriteLine("personajes nulos"); 
+        }
+        Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde el archivo existente!"],ventana.LimiteInferior,5,0);      
+    }else
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            Personaje pjALE = FabricaDePersonajes.CrearPersonajeAleatorio(PersonajesAPI);
+            ListaPersonajes.Add(pjALE);     
+        }
+        if (ListaPersonajes == null)
+        {
+            Console.WriteLine("personajes nulos"); 
+        }
+            PersonajesJson.GuardarPersonajes(ListaPersonajes,nombreArchivo);
+            Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde la API!"],ventana.LimiteInferior,5,0);
+            Console.ReadKey();
+    }
+    Yref =  Dialogos.EscribirCentrado(Dialogos.introduccion,ventana.LimiteInferior,Yref,30);
+     Yref = Dialogos.EscribirCentrado(Dialogos.DialogoIntroduccion,ventana.LimiteInferior,Yref,30); //50
+    AsciiJuego.EscribirTitulo(35,Yref+2);
+    Yref = Dialogos.EscribirCentrado( ["Antes de comenzar tu aventura, por favor crea tu personaje","presiona una tecla para continuar"],ventana.LimiteInferior,42,50);
+    Console.ReadKey();
+    return ListaPersonajes;
+}
+
+
+static Personaje CrearPJprincipal(Ventana ventana,InformacionAPI PersonajesAPI)
+{
+    Console.Clear();
+    ventana.DibujarMarco();
+    Personaje personajePrincipal = FabricaDePersonajes.personajePrincipal();
+    return personajePrincipal;
+}
+
+static void Combate(Ventana ventana,Personaje personajePrincipal,Personaje adversario)
+{
+    // while (personajePrincipal.Caracteristicas.Salud >0 && adversario.Caracteristicas.Salud>0)
+    //{
+        Console.Clear();
+        ventana.DibujarMarco();
+        AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+52,ventana.LimiteSuperior.Y+7);
+        AsciiJuego.DibujarVersus(ventana.LimiteSuperior.X+92,ventana.LimiteSuperior.Y+10);
+        AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+117,ventana.LimiteSuperior.Y+7);
+        Dialogos.EscribirCentrado( ["Antes de comenzar tu aventura, por favor crea tu personaje","presiona una tecla para continuar"],ventana.LimiteInferior,35,50);
+        Console.ReadKey();
+        
+    // };
+}
+
+
+
+/*static void PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI PersonajesAPI)
 {
     Console.Clear();
     ventana.DibujarMarco();
@@ -89,13 +157,7 @@ static void PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI Personaje
     {
         Console.WriteLine("personajes nulos"); 
     }
-                // foreach (Personaje item in personajes)
-                // {
-                //     // Console.WriteLine(item.datos.genero);
-
-                // }
-    PersonajesJson.GuardarPersonajes(ListaPersonajes,nombreArchivo);
-            
+    PersonajesJson.GuardarPersonajes(ListaPersonajes,nombreArchivo);       
     int Yref;
     if (PersonajesJson.Existe(nombreArchivo))
     {
@@ -112,18 +174,4 @@ static void PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI Personaje
         AsciiJuego.EscribirTitulo(35,Yref+2);
         Yref = Dialogos.EscribirCentrado( ["Antes de comenzar tu aventura, por favor crea tu personaje","presiona una tecla para continuar"],ventana.LimiteInferior,42,50);
         Console.ReadKey();
-}
-
-
-static Personaje CrearPJprincipal(Ventana ventana,InformacionAPI PersonajesAPI)
-{
-    Console.Clear();
-    ventana.DibujarMarco();
-    Personaje personajePrincipal = FabricaDePersonajes.personajePrincipal();
-    return personajePrincipal;
-    
-}
-
-
-
-
+}*/
