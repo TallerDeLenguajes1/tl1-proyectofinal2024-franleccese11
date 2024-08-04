@@ -175,10 +175,10 @@ namespace espacioPersonaje
 
     public class FabricaDePersonajes
     {
+        private static readonly Random random = new Random();
         public static Personaje CrearPersonajeAleatorio( InformacionAPI PersonajesAPI)
         {
-            var semilla = Environment.TickCount;
-            Random random = new Random(semilla);
+            
             int ALE = random.Next(0,PersonajesAPI.Results.Count);
             string nombre = PersonajesAPI.Results[ALE].Name;
             PersonajesAPI.Results[ALE].Gender.ToLower();

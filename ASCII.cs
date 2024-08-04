@@ -196,6 +196,16 @@ namespace espacioASCII
             Console.SetCursorPosition(x,y+13);
             Console.Write(@"│                           │");
             Console.SetCursorPosition(x,y+14);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+15);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+16);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+17);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+18);
+            Console.Write(@"│                           │");
+            Console.SetCursorPosition(x,y+19);
             Console.Write(@"╘═══════════════════════════╛");
         }
 

@@ -22,7 +22,6 @@ response.EnsureSuccessStatusCode();
 string responseBody = await response.Content.ReadAsStringAsync();
 InformacionAPI PersonajesAPI = JsonSerializer.Deserialize<InformacionAPI>(responseBody);
             
-
 Point limiteSuperior = new Point(2,2);
 Point limiteInferior = new Point(197,47);
 Ventana ventana = new Ventana(200,50,limiteSuperior,limiteInferior);
@@ -125,17 +124,98 @@ static Personaje CrearPJprincipal(Ventana ventana,InformacionAPI PersonajesAPI)
 
 static void Combate(Ventana ventana,Personaje personajePrincipal,Personaje adversario)
 {
-    // while (personajePrincipal.Caracteristicas.Salud >0 && adversario.Caracteristicas.Salud>0)
-    //{
+    Random random = new Random();
+    int ataqueProtagonista = personajePrincipal.Caracteristicas.Destreza *personajePrincipal.Caracteristicas.Fuerza * personajePrincipal.Caracteristicas.Nivel;
+    int ataqueAdversario =adversario.Caracteristicas.Destreza *adversario.Caracteristicas.Fuerza * adversario.Caracteristicas.Nivel;
+    int defensaProtagonista = personajePrincipal.Caracteristicas.Armadura * personajePrincipal.Caracteristicas.Velocidad;
+    int defensaAdversario = adversario.Caracteristicas.Armadura * adversario.Caracteristicas.Velocidad;
+    int yref;
+    int turno = 1;
+    
+    while (personajePrincipal.Caracteristicas.Salud >0 && adversario.Caracteristicas.Salud>0)
+    {
+        
         Console.Clear();
         ventana.DibujarMarco();
-        AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+52,ventana.LimiteSuperior.Y+7);
+        AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+52,ventana.LimiteSuperior.Y+5);
         AsciiJuego.DibujarVersus(ventana.LimiteSuperior.X+92,ventana.LimiteSuperior.Y+10);
-        AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+117,ventana.LimiteSuperior.Y+7);
-        Dialogos.EscribirCentrado( ["Antes de comenzar tu aventura, por favor crea tu personaje","presiona una tecla para continuar"],ventana.LimiteInferior,35,50);
-        Console.ReadKey();
+        AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+117,ventana.LimiteSuperior.Y+5);
+
+        Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+personajePrincipal.Datos.Nombre,"Especie: "+personajePrincipal.Datos.Especie,"Origen: "+personajePrincipal.Datos.Origen,"Destreza: "+personajePrincipal.Caracteristicas.Destreza,"Fuerza: "+personajePrincipal.Caracteristicas.Fuerza,"Armadura: "+personajePrincipal.Caracteristicas.Armadura,"Salud: "+personajePrincipal.Caracteristicas.Salud],ventana.LimiteSuperior.X+57,ventana.LimiteSuperior.Y+8,20,0);
+
+        Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+adversario.Datos.Nombre,"Especie: "+adversario.Datos.Especie,"Origen: "+personajePrincipal.Datos.Origen,"Destreza: "+adversario.Caracteristicas.Destreza,"Fuerza: "+adversario.Caracteristicas.Fuerza,"Armadura: "+adversario.Caracteristicas.Armadura,"Salud: "+adversario.Caracteristicas.Salud],ventana.LimiteSuperior.X+122,ventana.LimiteSuperior.Y+8,20,0);
         
-    // };
+        yref = Dialogos.EscribirCentrado( ["Turno numero: "+turno],ventana.LimiteInferior,27,150);
+        if (adversario.Caracteristicas.Salud < 5 && turno >1)
+        {
+            Dialogos.EscribirCentradoDialogoAleatorio(Dialogos.DialogosPocaVidaEnemigo,ventana.LimiteInferior,yref,50);
+        }
+        
+        int efectividad = random.Next(1,101);
+        int danio = Ataque(ataqueProtagonista,efectividad,defensaAdversario);
+        if (efectividad >= 75)
+        {
+            yref = Dialogos.EscribirCentrado( [personajePrincipal.Datos.Nombre+" Realizo un ataque altamente efectivo"],ventana.LimiteInferior,yref,50);
+            yref = Dialogos.EscribirCentrado( ["El daño provocado es:"+danio],ventana.LimiteInferior,yref,50);
+            yref = Dialogos.EscribirCentradoDialogoAleatorio(Dialogos.DialogosGolpeAltaEfectividad,ventana.LimiteInferior,yref,50);
+        } else
+        {
+            if (efectividad >= 35)
+            {
+                yref = Dialogos.EscribirCentrado( [personajePrincipal.Datos.Nombre+" Realizo un ataque con efectividad"],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentrado( ["El daño provocado es:"+danio],ventana.LimiteInferior,yref,50);
+            } else
+            {
+                yref = Dialogos.EscribirCentrado( [personajePrincipal.Datos.Nombre+" Realizo un ataque con muy poca efectividad"],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentrado( ["El daño provocado es:"+danio],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentradoDialogoAleatorio(Dialogos.DialogosGolpePocaEfectividad,ventana.LimiteInferior,yref,50);
+            }
+        }
+        adversario.Caracteristicas.Salud =adversario.Caracteristicas.Salud - danio;
+
+
+        int efectividad2 = random.Next(1,101);
+        int danio2 = Ataque(ataqueAdversario,efectividad2,defensaProtagonista);
+        if (efectividad2 >= 75)
+        {
+            yref = Dialogos.EscribirCentrado( [adversario.Datos.Nombre+" Realizo un ataque altamente efectivo"],ventana.LimiteInferior,yref,50);
+            yref = Dialogos.EscribirCentrado( ["El daño provocado es: "+danio2],ventana.LimiteInferior,yref,50);
+        } else
+        {
+            if (efectividad2 >= 35)
+            {
+                yref = Dialogos.EscribirCentrado( [adversario.Datos.Nombre+" Realizo un ataque con efectividad"],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentrado( ["El daño provocado es: "+danio2],ventana.LimiteInferior,yref,50);
+            } else
+            {
+                yref = Dialogos.EscribirCentrado( [adversario.Datos.Nombre+" Realizo un ataque con muy poca efectividad"],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentrado( ["El daño provocado es: "+danio2],ventana.LimiteInferior,yref,50);
+            }
+        }
+        personajePrincipal.Caracteristicas.Salud =personajePrincipal.Caracteristicas.Salud - danio2;
+        turno++;
+        Thread.Sleep(3000);
+        
+    };
+    Console.Clear();
+    ventana.DibujarMarco();
+    if (adversario.Caracteristicas.Salud<=0)
+    {  
+        yref = Dialogos.EscribirCentrado( ["felicidades, ganaste!"],ventana.LimiteInferior,20,50);
+        yref = Dialogos.EscribirCentradoDialogoAleatorio(Dialogos.DialogosGolpeFatal,ventana.LimiteInferior,20,50);
+    } else
+    {
+            yref = Dialogos.EscribirCentrado( ["Perdiste. estas eliminado del torneo"],ventana.LimiteInferior,20,50);
+    }
+    Console.ReadKey();
+  
+}
+
+static int Ataque(int ataque,int efectividad,int defensa)
+{
+    int csteAjuste = 500;
+    int danio = ((ataque*efectividad)-defensa)/csteAjuste;
+    return danio;
 }
 
 
