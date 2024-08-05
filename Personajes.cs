@@ -204,15 +204,20 @@ namespace espacioPersonaje
             Point limiteInferior =new Point(197,47);
             var semilla = Environment.TickCount;
             Random random = new Random(semilla);
-            string nombrePJ;
+            string nombrePJ="";
             do
             {
                  yref = Dialogos.EscribirCentrado(["Ingresa el nombre de tu personaje: "],limiteInferior,5,0);
                 nombrePJ= Console.ReadLine();
-            } while (nombrePJ == null);
+                if(string.IsNullOrEmpty(nombrePJ))
+                {
+                    yref = Dialogos.EscribirCentrado(["Error, por favor ingrese un nombre de almenos 1 caracter!" ],limiteInferior,yref,0);
+                    Console.WriteLine();
+                }
+            } while (string.IsNullOrEmpty(nombrePJ));
             
              
-            string generoPJ ;
+            string generoPJ="" ;
             do
             {
                 yref = Dialogos.EscribirCentrado(["Ingresa su genero(F= femenino , M= masculino , S= Sin genero):  "],limiteInferior,yref,0);

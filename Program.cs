@@ -38,27 +38,47 @@ switch (indiceSelec)
     case 0:
          List <Personaje> ListaPersonajes = new List<Personaje>();
         ListaPersonajes = PersistenciaDatosPersonajes(ventana,PersonajesAPI);
-        Combate(ventana,ListaPersonajes[1],ListaPersonajes[2]);
+        // Combate(ventana,ListaPersonajes[1],ListaPersonajes[2]);
         Console.ReadKey();
-        Personaje personajePrincipal = CrearPJprincipal(ventana, PersonajesAPI);
+        Personaje personajePrincipal = CrearPJprincipal(ventana, PersonajesAPI); 
         Console.ReadKey();
         Console.Clear();
         ventana.DibujarMarco();
-        AsciiJuego.Capitulo2(40,5);
+        AsciiJuego.Capitulo2(45,5);
         int yref=16;
-        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion,ventana.LimiteInferior,yref,40);
-        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion2,ventana.LimiteInferior,yref,40);
+        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion,ventana.LimiteInferior,yref,0);
+        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion2,ventana.LimiteInferior,yref,0);
         Console.Clear();
         ventana.DibujarMarco();
-        yref = 5;
+        yref = 12;
         if (personajePrincipal.Datos.Genero == "Femenino")
         {
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion3F,ventana.LimiteInferior,yref,40);
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4F,ventana.LimiteInferior,yref,40);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion3F,ventana.LimiteInferior,yref,50);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4F,ventana.LimiteInferior,yref,50);
+            Console.Clear();
+            ventana.DibujarMarco();
+            AsciiJuego.DibujarCapitulo3(33,5);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3F,ventana.LimiteInferior,16,50);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte2,ventana.LimiteInferior,yref,50);
+
+
         }else
         {
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion3M,ventana.LimiteInferior,yref,40);
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4M,ventana.LimiteInferior,yref,40);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion3M,ventana.LimiteInferior,yref,0);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4M,ventana.LimiteInferior,yref,0);
+            Console.Clear();
+            ventana.DibujarMarco();
+            AsciiJuego.DibujarCapitulo3(33,3);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3,ventana.LimiteInferior,12,0);
+            MostrarListaParticipantes1(ventana,ListaPersonajes);
+            Dialogos.EscribirCentrado(["presione una tecla para continuar..."],ventana.LimiteInferior,46,0);
+            Console.ReadKey();
+            Console.Clear();
+            ventana.DibujarMarco();
+            MostrarListaParticipantes2(ventana,ListaPersonajes);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte2,ventana.LimiteInferior,28,50);
+            Dialogos.EscribirCentrado(["presione una tecla para continuar..."],ventana.LimiteInferior,yref,0);
+            Console.ReadKey();
         }
         
         break;
@@ -121,6 +141,40 @@ static Personaje CrearPJprincipal(Ventana ventana,InformacionAPI PersonajesAPI)
     Personaje personajePrincipal = FabricaDePersonajes.personajePrincipal();
     return personajePrincipal;
 }
+static void MostrarListaParticipantes1(Ventana ventana,List<Personaje> ListaPersonajes)
+{
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+36,24);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[1].Datos.Nombre,"Especie: "+ListaPersonajes[1].Datos.Especie,"Origen: "+ListaPersonajes[1].Datos.Origen,"Destreza: "+ListaPersonajes[1].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[1].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[1].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[1].Caracteristicas.Salud],ventana.LimiteSuperior.X+41,27,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+70,24);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[2].Datos.Nombre,"Especie: "+ListaPersonajes[2].Datos.Especie,"Origen: "+ListaPersonajes[2].Datos.Origen,"Destreza: "+ListaPersonajes[2].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[2].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[2].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[2].Caracteristicas.Salud],ventana.LimiteSuperior.X+75,27,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+104,24);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[3].Datos.Nombre,"Especie: "+ListaPersonajes[3].Datos.Especie,"Origen: "+ListaPersonajes[3].Datos.Origen,"Destreza: "+ListaPersonajes[3].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[3].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[3].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[3].Caracteristicas.Salud],ventana.LimiteSuperior.X+109,27,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+138,24);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[4].Datos.Nombre,"Especie: "+ListaPersonajes[4].Datos.Especie,"Origen: "+ListaPersonajes[4].Datos.Origen,"Destreza: "+ListaPersonajes[4].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[4].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[4].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[4].Caracteristicas.Salud],ventana.LimiteSuperior.X+142,27,20,0);
+
+}
+
+static void MostrarListaParticipantes2(Ventana ventana,List<Personaje> ListaPersonajes)
+{
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+10,5);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[5].Datos.Nombre,"Especie: "+ListaPersonajes[5].Datos.Especie,"Origen: "+ListaPersonajes[5].Datos.Origen,"Destreza: "+ListaPersonajes[5].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[5].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[5].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[5].Caracteristicas.Salud],ventana.LimiteSuperior.X+15,8,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+44,5);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[6].Datos.Nombre,"Especie: "+ListaPersonajes[6].Datos.Especie,"Origen: "+ListaPersonajes[6].Datos.Origen,"Destreza: "+ListaPersonajes[6].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[6].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[6].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[6].Caracteristicas.Salud],ventana.LimiteSuperior.X+49,8,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+78,5);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[7].Datos.Nombre,"Especie: "+ListaPersonajes[7].Datos.Especie,"Origen: "+ListaPersonajes[7].Datos.Origen,"Destreza: "+ListaPersonajes[7].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[7].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[7].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[7].Caracteristicas.Salud],ventana.LimiteSuperior.X+83,8,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+112,5);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[8].Datos.Nombre,"Especie: "+ListaPersonajes[8].Datos.Especie,"Origen: "+ListaPersonajes[8].Datos.Origen,"Destreza: "+ListaPersonajes[8].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[8].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[8].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[8].Caracteristicas.Salud],ventana.LimiteSuperior.X+116,8,20,0);
+
+    AsciiJuego.DibujarMarcoDePelea(ventana.LimiteSuperior.X+146,5);
+    Dialogos.EscribirEnCoordenadasConDesborde(["Nombre: "+ListaPersonajes[0].Datos.Nombre,"Especie: "+ListaPersonajes[0].Datos.Especie,"Origen: "+ListaPersonajes[0].Datos.Origen,"Destreza: "+ListaPersonajes[0].Caracteristicas.Destreza,"Fuerza: "+ListaPersonajes[0].Caracteristicas.Fuerza,"Armadura: "+ListaPersonajes[0].Caracteristicas.Armadura,"Salud: "+ListaPersonajes[0].Caracteristicas.Salud],ventana.LimiteSuperior.X+151,8,20,0);
+}
+
 
 static void Combate(Ventana ventana,Personaje personajePrincipal,Personaje adversario)
 {

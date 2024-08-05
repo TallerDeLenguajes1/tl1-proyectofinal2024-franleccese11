@@ -5,6 +5,7 @@ using System.Text;
 using espacioMenu;
 using espacioPersonaje;
 using espacioConsola;
+using espacioDatos;
 namespace espacioDialogos
 {
     
@@ -163,7 +164,7 @@ namespace espacioDialogos
         };
         public static string[] DialogoInvitacion3F = new string[]
         {
-            "Rick ajustó su pistola de portales y, con un gesto decidido, abrió otro portal.","Ambos lo atravesaron y llegaron a un laboratorio subterráneo en una dimensión alternativa.","Allí, un joven científico trabajaba incansablemente en una máquina."
+            "Rick ajustó su pistola de portales y, con un gesto decidido, abrió otro portal.","Ambos lo atravesaron y llegaron a un laboratorio subterráneo en una dimensión alternativa.","Allí, una joven científica trabajaba incansablemente en una máquina."
         };
 
         public static string[] DialogoInvitacion4M = new string[]
@@ -197,11 +198,11 @@ namespace espacioDialogos
         {
             "Rick: Eres justo la persona que estaba buscando.",
 
-            "El joven científico levantó la vista, sorprendido por la aparición de Rick y Morty en su laboratorio.",
+            "La joven científica levantó la vista, sorprendida por la aparición de Rick y Morty en su laboratorio.",
 
             "Rick: Soy Rick Sanchez. Este es mi nieto, Morty.Nos han invitado al Torneo del Multiverso","y necesitamos a alguien con tu talento para unirte a nuestro equipo. ¿Te interesa?",
 
-            "El joven científico, intrigado por la propuesta, asintió con la cabeza."
+            "La joven científica, intrigada por la propuesta, asintió con la cabeza."
             ,
             "Rick: Perfecto. Entonces, ¡prepárate! Porque vamos a patear algunos traseros interdimensionales.",
 
@@ -213,11 +214,11 @@ namespace espacioDialogos
                 ,
             "Rick: Sí, Morty. Y, bueno, tú y yo... no cumplimos con ese criterio. Aun asi tendremos influencia en este torneo", "ya que seremos los estrategas, mientras nuestro nuevo amigo aquí se encarga de la acción."
                 ,
-            "Morty: Eso suena... ¿espera, estás diciendo que él es el único que no es un imbécil?",
+            "Morty: Eso suena... ¿espera, estás diciendo que éllla es la única que no es una imbécil?",
 
             "Rick: Exacto, Morty. Ahora deja de quejarte y vamos a ganar ese maldito torneo.",
 
-            "Así, nuestro protagonista se unió a Rick y Morty en su misión de ganar el Torneo del Multiverso","y obtener la Esfera de la Realidad. El destino del multiverso ahora dependía de ellos."
+            "Así, nuestra protagonista se unió a Rick y Morty en su misión de ganar el Torneo del Multiverso","y obtener la Esfera de la Realidad. El destino del multiverso ahora dependía de ellos."
         };
 
         public static string[] DialogosGolpeAltaEfectividad = new string[]
@@ -241,7 +242,6 @@ namespace espacioDialogos
             "",
             "",
             "",
-            "",
             ""
         };
 
@@ -261,7 +261,83 @@ namespace espacioDialogos
             "Morty: ¡Está a punto de caer! ¡No te detengas!",
             "Rick: Mira, Morty, está al borde. Un empujoncito más y lo mandamos al olvido.",
             "Rick: Ese pobre desgraciado está al límite. Vamos a ponerle fin rápido.",
-            "","","","","","","",""
+            "","",""
         };
+
+         public static string[] DialogoCapitulo3 = new string[]
+         {
+            "Tras recibir la invitación para participar en el torneo, nuestro protagonista," , "acompañado por Rick y Morty, se dirige al centro de registro."," Allí, una pantalla gigante muestra la lista de los rivales inscriptos",", cada uno más extraño y formidable que el anterior"
+            ,
+            "Rick, con su usual indiferencia, revisa la lista mientras toma un trago de su botella de Kirkland. ","Veamos, Morty, quiénes son los desafortunados que se enfrentarán a nuestro pequeño guerrero",
+
+            "La lista incluye una variedad de personajes de diferentes dimensiones, algunos conocidos y otros totalmente nuevos:",
+         };
+
+         public static string[] DialogoCapitulo3F = new string[]
+         {
+            "Tras recibir la invitación para participar en el torneo, nuestra protagonista," , "acompañada por Rick y Morty, se dirige al centro de registro."," Allí, una pantalla gigante muestra la lista de los rivales inscriptos",", cada uno más extraño y formidable que el anterior"
+            ,
+            "Rick, con su usual indiferencia, revisa la lista mientras toma un trago de su botella de Kirkland. ","Veamos, Morty, quiénes son los desafortunados que se enfrentarán a nuestro pequeño guerrero",
+
+            "La lista incluye una variedad de personajes de diferentes dimensiones, algunos conocidos para nuestro duo y otros totalmente nuevos:",
+         };
+
+        public static string[] DialogoCapitulo3parte2 = new string[]
+        {
+            "Morty, con los ojos abiertos de par en par, comenta:","Oh, Dios mío, Rick, ¡estos son algunos de los tipos más duros que hemos conocido!", 
+            "Rick: Relájate, Morty. Solo necesitamos un buen plan y un poco de suerte."," Además, ¿cuántas veces hemos estado en situaciones más peligrosas?"
+            
+        };
+
+        public static string[] DialogoCapitulo3parte3 = new string[]
+        {
+            "El día había llegado. Rick, Morty y el jugador, cuyo nombre resonaba con un aura de misterio","y determinación, estaban listos para embarcarse en su primer desafío. ","La nave de Rick zumbaba con un suave brillo azul mientras se deslizaba entre las dimensiones,"," el trío estaba preparado para enfrentar lo que se les presentara.",
+            
+            "Rick: Recuerda, en las peleas por turnos, cada decisión cuenta."," Evalúa tus habilidades y actúa en consecuencia.",
+
+            "La nave atraviesa varias dimensiones, cada una más extraña que la anterior."," En una, ven un mundo donde los perros gobiernan y los humanos son ","sus mascotas. En otra, una dimensión completamente hecha de queso.", 
+
+            "Rick, ajustando algunos controles en la nave, murmura: Morty, asegúrate de no tocar nada.","La última vez que lo hiciste, terminamos en una dimensión donde las personas tienen cabezas de pepinillo...", 
+
+            "Morty: Rick, ¿estás seguro de que tenemos una oportunidad contra estos tipos?",
+
+            "Rick: Morty, siempre tenemos una oportunidad. ","Solo necesitamos ser más inteligentes, más rápidos y, en tu caso, menos... Morty.",
+
+            "Despues un largo viaje Finalmente llegan a la arena del torneo..."
+        };
+
+        public static string[] DialogoCapitulo3parte3F = new string[]
+        {
+            "El día había llegado. Rick, Morty y la jugadora, cuyo nombre resonaba con un aura de misterio","y determinación, estaban listos para embarcarse en su primer desafío. ","La nave de Rick zumbaba con un suave brillo azul mientras se deslizaba entre las dimensiones,"," el trío estaba preparado para enfrentar lo que se les presentara.",
+            
+            "Rick: Recuerda, en las peleas por turnos, cada decisión cuenta."," Evalúa tus habilidades y actúa en consecuencia.",
+
+            "La nave atraviesa varias dimensiones, cada una más extraña que la anterior."," En una, ven un mundo donde los perros gobiernan y los humanos son ","sus mascotas. En otra, una dimensión completamente hecha de queso.", 
+
+            "Rick, ajustando algunos controles en la nave, murmura: Morty, asegúrate de no tocar nada.","La última vez que lo hiciste, terminamos en una dimensión donde las personas tienen cabezas de pepinillo...", 
+
+            "Morty: Rick, ¿estás seguro de que tenemos una oportunidad contra estos tipos?",
+
+            "Rick: Morty, siempre tenemos una oportunidad. ","Solo necesitamos ser más inteligentes, más rápidos y, en tu caso, menos... Morty.",
+
+            "Despues un largo viaje Finalmente llegan a la arena del torneo..."
+        };
+
+        public static string[] DialogoCapitulo4parte1 = new string[]
+        {
+            "Despues un largo viaje Finalmente llegan a la arena del torneo, la atmósfera es electrizante.","La gigantesca estructura flotante se ubica en medio de una nebulosa multicolor. ","La tensión en el aire es palpable mientras los combatientes se preparan para los cuartos de final.",
+            "El primer combate es entre nuestro protagonista y uno de los adversarios mas prometedores del certamen." ,
+
+            "Nuestro protagonista, con determinación en sus ojos, avanza hacia el centro del coliseo. ","Rick y Morty, observando desde la línea de espectadores, intercambian miradas expectantes.","Rick murmura sarcásticamente: Bueno, Morty, aquí vamos. Espero que nuestro campeón sepa lo que hace.","Morty, nervioso pero esperanzado, responde: ¡Vamos, tú puedes hacerlo!¡Hazlo por nosotros! ","La batalla está por comenzar, y la tensión en el aire es palpable..." 
+        };
+
+        public static string[] DialogoCapitulo4parte1F = new string[]
+        {
+            "Despues un largo viaje Finalmente llegan a la arena del torneo, la atmósfera es electrizante.","La gigantesca estructura flotante se ubica en medio de una nebulosa multicolor. ","La tensión en el aire es palpable mientras los combatientes se preparan para los cuartos de final.",
+            "El primer combate es entre nuestra protagonista y uno de los adversarios mas prometedores del certamen." ,
+            "Nuestra protagonista, con determinación en sus ojos, avanza hacia el centro del coliseo. ","Rick y Morty, observando desde la línea de espectadores, intercambian miradas expectantes.","Rick murmura sarcásticamente: Bueno, Morty, aquí vamos. Espero que nuestra campeóna sepa lo que hace.","Morty, nervioso pero esperanzado, responde: ¡Vamos, tú puedes hacerlo!¡Hazlo por nosotros! ","La batalla está por comenzar, y la tensión en el aire es palpable..." 
+        };
+
+
     }
 }
