@@ -129,7 +129,7 @@ namespace espacioDialogos
          { 
         "RICK: Morty, escucha bien. Nos han invitado al Torneo del Multiverso.","Todos los genios locos,guerreros interdimensionales y criaturas mágicas"," estarán allí, y el premio es la Esfera de la Realidad.",
         "MORTY: Oh, hombre, Rick. ¿Eso no es demasiado peligroso?", 
-        "Rick: Sí, Morty. Pero la Esfera de la Realidad podría resolver cualquier problema.","Podríamos arreglar el multiverso de una vez por todas.", " Así que agarra tu arma y prepárate, porque vamos a patear algunos traseros interdimensionales. "
+        "Rick: Sí, Morty. Pero la Esfera de la Realidad podría resolver cualquier problema.","Podríamos arreglar el multiverso de una vez por todas.", " Así que pon a cargar la pistola de portales y prepárate, porque vamos a patear algunos traseros interdimensionales. "
         };
 
         public static string[] DialogoInvitacion = new string[]
@@ -316,14 +316,14 @@ namespace espacioDialogos
 
             "Rick, ajustando algunos controles en la nave, murmura: Morty, asegúrate de no tocar nada.","La última vez que lo hiciste, terminamos en una dimensión donde las personas tienen cabezas de pepinillo...", 
 
-            "Morty: Rick, ¿estás seguro de que tenemos una oportunidad contra estos tipos?",
+            "Morty, nervioso pero intentando mantener la compostura: Rick, ¿estás seguro de que tenemos una oportunidad contra estos tipos?",
 
             "Rick: Morty, siempre tenemos una oportunidad. ","Solo necesitamos ser más inteligentes, más rápidos y, en tu caso, menos... Morty.",
 
             "Despues un largo viaje Finalmente llegan a la arena del torneo..."
         };
 
-        public static string[] DialogoCapitulo4parte1 = new string[]
+        public static string[] DialogoCapitulo4parte1M = new string[]
         {
             "Despues un largo viaje Finalmente llegan a la arena del torneo, la atmósfera es electrizante.","La gigantesca estructura flotante se ubica en medio de una nebulosa multicolor. ","La tensión en el aire es palpable mientras los combatientes se preparan para los cuartos de final.",
             "El primer combate es entre nuestro protagonista y uno de los adversarios mas prometedores del certamen." ,

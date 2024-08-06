@@ -165,6 +165,24 @@ namespace espacioASCII
         "
     };
 
+    public static string[] marcoSemifinales = new string[]
+    {
+        @"
+╒════════════════╤════════════════╕
+│ SEMIFINAL 1:   │ SEMIFINAL 2:   │
+│                │                │
+│                │                │
+│                │                │
+│                │                │
+│                │                │
+│                │                │
+|                |                |
+|                |                |
+╘════════════════╧════════════════╛
+
+        "
+    };
+
         public static void DibujarMarcoDePelea(int x,int y)
         {
             Console.SetCursorPosition(x,y);
@@ -280,6 +298,32 @@ namespace espacioASCII
             Console.SetCursorPosition(x,y+6);
             Console.Write(@"            |_|                                                                                                                         ");
          }
+
+         public static void DibujarMarcoSemifinales(int x,int y)
+         {
+            Console.SetCursorPosition(x,y+1);
+            Console.Write(@"╒════════════════╤════════════════╕");
+            Console.SetCursorPosition(x,y+2);
+            Console.Write(@"│ SEMIFINAL 1:   │ SEMIFINAL 2:   │");
+            Console.SetCursorPosition(x,y+3);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+4);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+5);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+6);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+7);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+8);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+9);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+10);
+            Console.Write(@"│                │                │");
+            Console.SetCursorPosition(x,y+11);
+            Console.Write(@"╘════════════════╧════════════════╛");
+        }
     }
 
 

@@ -36,9 +36,9 @@ int indiceSelec= MenuPrincipal.Run(5,37);
 switch (indiceSelec)
 {
     case 0:
+        Random random = new Random();
          List <Personaje> ListaPersonajes = new List<Personaje>();
         ListaPersonajes = PersistenciaDatosPersonajes(ventana,PersonajesAPI);
-        // Combate(ventana,ListaPersonajes[1],ListaPersonajes[2]);
         Console.ReadKey();
         Personaje personajePrincipal = CrearPJprincipal(ventana, PersonajesAPI); 
         Console.ReadKey();
@@ -46,8 +46,8 @@ switch (indiceSelec)
         ventana.DibujarMarco();
         AsciiJuego.Capitulo2(45,5);
         int yref=16;
-        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion,ventana.LimiteInferior,yref,0);
-        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion2,ventana.LimiteInferior,yref,0);
+        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion,ventana.LimiteInferior,yref,50);
+        yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion2,ventana.LimiteInferior,yref,50);
         Console.Clear();
         ventana.DibujarMarco();
         yref = 12;
@@ -57,19 +57,36 @@ switch (indiceSelec)
             yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4F,ventana.LimiteInferior,yref,50);
             Console.Clear();
             ventana.DibujarMarco();
-            AsciiJuego.DibujarCapitulo3(33,5);
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3F,ventana.LimiteInferior,16,50);
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte2,ventana.LimiteInferior,yref,50);
-
+            AsciiJuego.DibujarCapitulo3(33,3);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3F,ventana.LimiteInferior,12,50);
+            MostrarListaParticipantes1(ventana,ListaPersonajes);
+            Dialogos.EscribirCentrado(["presione una tecla para continuar..."],ventana.LimiteInferior,46,50);
+            Console.ReadKey();
+            Console.Clear();
+            ventana.DibujarMarco();
+            MostrarListaParticipantes2(ventana,ListaPersonajes);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte2,ventana.LimiteInferior,28,50);
+            Dialogos.EscribirCentrado(["presione una tecla para continuar..."],ventana.LimiteInferior,yref,0);
+            Console.ReadKey();
+            Console.Clear();
+            ventana.DibujarMarco();
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte3F,ventana.LimiteInferior,12,50);
+            Thread.Sleep(3000);
+            Console.Clear();
+            ventana.DibujarMarco();
+            AsciiJuego.DibujarCapitulo4(40,5);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo4parte1F,ventana.LimiteInferior,20,50);
+            yref = Dialogos.EscribirCentrado(["Presiona una tecla para comenzar los cuartos de final!"],ventana.LimiteInferior,yref,50);
+            Console.ReadKey();
 
         }else
         {
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion3M,ventana.LimiteInferior,yref,0);
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4M,ventana.LimiteInferior,yref,0);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion3M,ventana.LimiteInferior,yref,50);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoInvitacion4M,ventana.LimiteInferior,yref,50);
             Console.Clear();
             ventana.DibujarMarco();
             AsciiJuego.DibujarCapitulo3(33,3);
-            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3,ventana.LimiteInferior,12,0);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3,ventana.LimiteInferior,12,50);
             MostrarListaParticipantes1(ventana,ListaPersonajes);
             Dialogos.EscribirCentrado(["presione una tecla para continuar..."],ventana.LimiteInferior,46,0);
             Console.ReadKey();
@@ -79,7 +96,83 @@ switch (indiceSelec)
             yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte2,ventana.LimiteInferior,28,50);
             Dialogos.EscribirCentrado(["presione una tecla para continuar..."],ventana.LimiteInferior,yref,0);
             Console.ReadKey();
+            Console.Clear();
+            ventana.DibujarMarco();
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo3parte3,ventana.LimiteInferior,13,50);
+            Thread.Sleep(3000);
+            Console.Clear();
+            ventana.DibujarMarco();
+            AsciiJuego.DibujarCapitulo4(40,5);
+            yref = Dialogos.EscribirCentrado(Dialogos.DialogoCapitulo4parte1M,ventana.LimiteInferior,20,50);
+            yref = Dialogos.EscribirCentrado(["Presiona una tecla para comenzar los cuartos de final!"],ventana.LimiteInferior,yref,50);
+            Console.ReadKey();
         }
+        int bandera = 0;
+        int saludAux = personajePrincipal.Caracteristicas.Salud;
+        int saludAux2 = ListaPersonajes[0].Caracteristicas.Salud;
+        do
+        {
+            personajePrincipal.Caracteristicas.Salud = saludAux;
+            ListaPersonajes[0].Caracteristicas.Salud = saludAux2;
+            Combate(ventana,personajePrincipal,ListaPersonajes[0]);
+            Console.Clear();
+            ventana.DibujarMarco();
+            if (ListaPersonajes[0].Caracteristicas.Salud<=0)
+            {  
+                yref = Dialogos.EscribirCentradoDialogoAleatorio(Dialogos.DialogosGolpeFatal,ventana.LimiteInferior,16,50);
+                yref = Dialogos.EscribirCentrado( ["felicidades, ganaste tu combate!"],ventana.LimiteInferior,yref,50);
+                personajePrincipal.Caracteristicas.Salud = saludAux + 5;
+                yref = Dialogos.EscribirCentrado( ["seras premiado con un aumento en tus estadisticas de salud!"],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentrado( ["...Salud +5"],ventana.LimiteInferior,yref,50);
+                yref = Dialogos.EscribirCentrado( ["presiona una tecla para ver la tabla de semifinales!"],ventana.LimiteInferior,yref,50);
+                bandera =1;
+                } else
+                {
+                    yref = Dialogos.EscribirCentrado( ["Perdiste tu batalla.","¿quieres volver a intentarlo?"],ventana.LimiteInferior,16,50);
+                    string intento="";
+                    do
+                    {
+                        yref = Dialogos.EscribirCentrado( ["-)Presiona 's' para reintentarlo","-)presiona 'n' para salir del juego"],ventana.LimiteInferior,yref,50);
+                        intento = Console.ReadLine();
+                            if (intento !="s" && intento!="n"&& intento!="N"&&intento !="S")
+                            {
+                                yref = Dialogos.EscribirCentrado( ["error,por favor ingresa un caracter valido!"],ventana.LimiteInferior,yref,50);
+                            }
+                        } while (intento !="s" && intento!="n"&& intento!="N"&&intento !="S");
+                        if (intento=="n"||intento=="N")
+                        {
+                            yref = Dialogos.EscribirCentrado( ["presiona una tecla para salir...!"],ventana.LimiteInferior,yref,50);
+                            Console.ReadKey();
+                            Environment.Exit(0);
+                        }else
+                        {
+                            yref = Dialogos.EscribirCentrado( ["Buena decision! presiona una tecla para reintentar el combate"],ventana.LimiteInferior,yref,50);
+                            Console.ReadKey();
+                        }
+                }
+                
+            } while (bandera==0);
+            Console.Clear();
+            ventana.DibujarMarco();
+            AsciiJuego.DibujarMarcoSemifinales(70,14);
+            
+            List<Personaje> listaAux = ListaPersonajes;
+            listaAux.Remove(listaAux[0]);
+            for (int i = 0; i < 5; i++)
+            {
+                int aleatorio= random.Next(0,listaAux.Count);
+                listaAux.Remove(listaAux[aleatorio]);
+            }
+            List<Personaje> listaPersonajesSemifinal = listaAux;
+            Dialogos.EscribirEnCoordenadasConDesborde([""+personajePrincipal.Datos.Nombre,"  VS  ",""+listaPersonajesSemifinal[0].Datos.Nombre],72,18,14,0);
+            Dialogos.EscribirEnCoordenadasConDesborde([""+listaPersonajesSemifinal[1].Datos.Nombre,"  VS  ",""+listaPersonajesSemifinal[2].Datos.Nombre],90,18,14,0);
+            
+            Console.WriteLine(listaPersonajesSemifinal.Count);
+            foreach (var item in listaPersonajesSemifinal)
+            {
+                Console.WriteLine(item.Datos.Nombre);
+            }
+            Console.ReadKey();
         
         break;
     case 1:
@@ -91,7 +184,6 @@ switch (indiceSelec)
 
 }
 
-Console.ReadKey();
 
 
 static List <Personaje> PersistenciaDatosPersonajes(Ventana ventana,InformacionAPI PersonajesAPI)
@@ -109,7 +201,9 @@ static List <Personaje> PersistenciaDatosPersonajes(Ventana ventana,InformacionA
         {
             Console.WriteLine("personajes nulos"); 
         }
-        Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde el archivo existente!"],ventana.LimiteInferior,5,0);      
+        Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde el archivo existente!"],ventana.LimiteInferior,5,50);
+        Console.Clear();
+        ventana.DibujarMarco();      
     }else
     {
         for (int i = 0; i < 9; i++)
@@ -122,8 +216,10 @@ static List <Personaje> PersistenciaDatosPersonajes(Ventana ventana,InformacionA
             Console.WriteLine("personajes nulos"); 
         }
             PersonajesJson.GuardarPersonajes(ListaPersonajes,nombreArchivo);
-            Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde la API!"],ventana.LimiteInferior,5,0);
+            Yref = Dialogos.EscribirCentrado(["Personajes cargados exitosamente desde la API!"],ventana.LimiteInferior,5,50);
             Console.ReadKey();
+            Console.Clear();
+            ventana.DibujarMarco();
     }
     Yref =  Dialogos.EscribirCentrado(Dialogos.introduccion,ventana.LimiteInferior,Yref,30);
      Yref = Dialogos.EscribirCentrado(Dialogos.DialogoIntroduccion,ventana.LimiteInferior,Yref,30); //50
@@ -251,17 +347,7 @@ static void Combate(Ventana ventana,Personaje personajePrincipal,Personaje adver
         Thread.Sleep(3000);
         
     };
-    Console.Clear();
-    ventana.DibujarMarco();
-    if (adversario.Caracteristicas.Salud<=0)
-    {  
-        yref = Dialogos.EscribirCentrado( ["felicidades, ganaste!"],ventana.LimiteInferior,20,50);
-        yref = Dialogos.EscribirCentradoDialogoAleatorio(Dialogos.DialogosGolpeFatal,ventana.LimiteInferior,20,50);
-    } else
-    {
-            yref = Dialogos.EscribirCentrado( ["Perdiste. estas eliminado del torneo"],ventana.LimiteInferior,20,50);
-    }
-    Console.ReadKey();
+    
   
 }
 
