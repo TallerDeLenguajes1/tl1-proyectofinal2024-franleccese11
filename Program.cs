@@ -321,11 +321,14 @@ switch (indiceSelec)
         yref2= Dialogos.EscribirCentrado(["Personaje Ganador NUMERO: "+k,"nombre: "+item.Nombre,"Especie: "+item.Especie,"Origen:"+item.Origen,"Fecha de su victoria: "+fechaSinHora,"------------------------------------------------------------------"],limiteInferior,yref2,50);
         k++;
        }
-        yref2=Dialogos.EscribirCentrado(["presione una tecla para volver al menu..."],ventana.LimiteInferior,yref2,50);
+        yref2=Dialogos.EscribirCentrado(["presione una tecla para salir..."],ventana.LimiteInferior,yref2,30);
         Console.ReadKey();
 
         break;
     case 2:
+        int yref3=12;
+        yref3=Dialogos.EscribirCentrado(["Version:1.0.1","Creador: Francisco Jose Leccese","Hecho en c# con fines academicos"],ventana.LimiteInferior,yref3,50);
+        Console.ReadKey();
         break;
     case 3:
         Environment.Exit(0);
