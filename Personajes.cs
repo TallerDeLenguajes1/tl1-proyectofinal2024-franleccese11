@@ -172,6 +172,8 @@ namespace espacioPersonaje
             Salud = salud;
         }
     }
+    
+    
 
     public class FabricaDePersonajes
     {
@@ -255,8 +257,8 @@ namespace espacioPersonaje
             yref = Dialogos.EscribirCentrado(["Personaje principal creado con exito! sus caracteristicas de pelea son:"],limiteInferior,yref,0); 
             int velocidadPJ = random.Next(1,11);
             int destrezaPJ=random.Next(1,6);
-            int fuerzaPJ = random.Next(5,11);
-            int nivelPJ = random.Next(5,11);
+            int fuerzaPJ = random.Next(3,11);
+            int nivelPJ = random.Next(3,11);
             int armaduraPJ = random.Next(1,101);
             // int saludPJ = random.Next(1,101);
             int saludPJ = 90;

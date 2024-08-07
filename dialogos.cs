@@ -355,9 +355,9 @@ namespace espacioDialogos
         {
             "Morty: wow. Ganamos! ¡Eres increíble!"
             ,
-            "Rick: Sabía que tenías potencial. Ahora tenemos la Esfera de la Realidad. ¿Te das cuenta de lo que podemos hacer con esto?"
+            "Rick: Sabía que tenías potencial. Ahora tenemos la Esfera de la Realidad."," ¿Te das cuenta de lo que podemos hacer con esto?"
             ,
-            "Rick: Es una victoria para todos nosotros. Aunque, técnicamente, es más una victoria mía, ya sabes, por la genialidad genética y todo eso."
+            "Rick: Es una victoria para todos nosotros. Aunque, técnicamente,","es más una victoria mía, ya sabes, por la genialidad genética y todo eso."
             ,
             "Morty: Rick, esto es sobre él ¡Es el verdadero héroe aquí!"
             ,

@@ -249,7 +249,14 @@ switch (indiceSelec)
                 yref = Dialogos.EscribirCentrado( ["eres oficialmente campeon del torneo multiversal!"],ventana.LimiteInferior,yref,50);
                 yref = Dialogos.EscribirCentrado( ["guardando tu personaje en el historial de ganadores..."],ventana.LimiteInferior,yref,50);
                 Thread.Sleep(1500);
-                yref = Dialogos.EscribirCentrado( ["guardado exitosamente!"],ventana.LimiteInferior,yref,50);
+                PersonajeGanador ganador = new PersonajeGanador(personajePrincipal.Datos.Nombre,personajePrincipal.Datos.Especie,personajePrincipal.Datos.Origen,DateTime.Today);
+
+
+                historialJSON.GuardarGanador(ganador,"historialGanadores.json");
+                if(historialJSON.Existe("historialGanadores.json"))
+                {
+                    yref = Dialogos.EscribirCentrado( ["guardado exitosamente!"],ventana.LimiteInferior,yref,50);
+                }
                 yref = Dialogos.EscribirCentrado( ["..."],ventana.LimiteInferior,yref,50);
                 yref = Dialogos.EscribirCentrado( Dialogos.DialogoPostFinal,ventana.LimiteInferior,yref,50);
 
@@ -283,7 +290,7 @@ switch (indiceSelec)
         } while (bandera3==0);
         Console.Clear();
         ventana.DibujarMarco();
-        AsciiJuego.DibujarCap5(45,5);
+        AsciiJuego.DibujarCap5(48,5);
         if (personajePrincipal.Datos.Genero=="Femenino")
         {
             yref = Dialogos.EscribirCentrado(Dialogos.DialogoEpilogo1F,ventana.LimiteInferior,18,50);
@@ -300,14 +307,28 @@ switch (indiceSelec)
             Console.ReadKey();
         }
 
-
-
         break;
     case 1:
+        Console.Clear();
+        ventana.DibujarMarco();
+       List <PersonajeGanador> personajesGanadores =  historialJSON.LeerGanadores("historialGanadores.json");
+       int k =1;
+       int yref2=10;
+       foreach (PersonajeGanador item in personajesGanadores)
+       {
+        
+        string fechaSinHora = item.Hoy.ToString("yyyy-MM-dd");
+        yref2= Dialogos.EscribirCentrado(["Personaje Ganador NUMERO: "+k,"nombre: "+item.Nombre,"Especie: "+item.Especie,"Origen:"+item.Origen,"Fecha de su victoria: "+fechaSinHora,"------------------------------------------------------------------"],limiteInferior,yref2,50);
+        k++;
+       }
+        yref2=Dialogos.EscribirCentrado(["presione una tecla para volver al menu..."],ventana.LimiteInferior,yref2,50);
+        Console.ReadKey();
+
         break;
     case 2:
         break;
     case 3:
+        Environment.Exit(0);
         break;
 
 }
