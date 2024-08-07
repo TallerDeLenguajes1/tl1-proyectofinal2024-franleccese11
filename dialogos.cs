@@ -204,7 +204,7 @@ namespace espacioDialogos
 
             "La joven científica, intrigada por la propuesta, asintió con la cabeza."
             ,
-            "Rick: Perfecto. Entonces, ¡prepárate! Porque vamos a patear algunos traseros interdimensionales.",
+            "Rick: Perfecto. Entonces, ¡prepárate! Porque vamos a patear algunos traseros interdimensionales. Tu seras el musculo y nosotros el cerebro.",
 
             "Morty: Espera, Rick. ¿Por qué no podemos luchar nosotros también?"
                 ,
@@ -320,12 +320,12 @@ namespace espacioDialogos
 
             "Rick: Morty, siempre tenemos una oportunidad. ","Solo necesitamos ser más inteligentes, más rápidos y, en tu caso, menos... Morty.",
 
-            "Despues un largo viaje Finalmente llegan a la arena del torneo..."
+            "Despues de un largo viaje Finalmente llegan a la arena del torneo..."
         };
 
         public static string[] DialogoCapitulo4parte1M = new string[]
         {
-            "Despues un largo viaje Finalmente llegan a la arena del torneo, la atmósfera es electrizante.","La gigantesca estructura flotante se ubica en medio de una nebulosa multicolor. ","La tensión en el aire es palpable mientras los combatientes se preparan para los cuartos de final.",
+            "Despues de un largo viaje Finalmente llegan a la arena del torneo, la atmósfera es electrizante.","La gigantesca estructura flotante se ubica en medio de una nebulosa multicolor. ","La tensión en el aire es palpable mientras los combatientes se preparan para los cuartos de final.",
             "El primer combate es entre nuestro protagonista y uno de los adversarios mas prometedores del certamen." ,
 
             "Nuestro protagonista, con determinación en sus ojos, avanza hacia el centro del coliseo. ","Rick y Morty, observando desde la línea de espectadores, intercambian miradas expectantes.","Rick murmura sarcásticamente: Bueno, Morty, aquí vamos. Espero que nuestro campeón sepa lo que hace.","Morty, nervioso pero esperanzado, responde: ¡Vamos, tú puedes hacerlo!¡Hazlo por nosotros! ","La batalla está por comenzar, y la tensión en el aire es palpable..." 
@@ -339,5 +339,92 @@ namespace espacioDialogos
         };
 
 
+         public static string[] DialogoFinal1 = new string[]
+         {
+            "Morty: ¡Rick, no puede ser! ¿Cómo vamos a enfrentar a ese monstruo?",
+            "Rick: Morty, cálmate. Sí, es un oponente fuerte, pero nada que no podamos manejar con un poco de ingenio",
+         };
+
+         public static string[] DialogoFinal2 = new string[]
+         {
+            "Morty: ¿Qué? ¿Ácido sulfúrico? ¡Rick, eso no es un plan B!",
+            "Rick: Calma, Morty. Solo estoy bromeando. O tal vez no. Nunca lo sabrás."
+         };
+
+        public static string[] DialogoPostFinal = new string[]
+        {
+            "Morty: wow. Ganamos! ¡Eres increíble!"
+            ,
+            "Rick: Sabía que tenías potencial. Ahora tenemos la Esfera de la Realidad. ¿Te das cuenta de lo que podemos hacer con esto?"
+            ,
+            "Rick: Es una victoria para todos nosotros. Aunque, técnicamente, es más una victoria mía, ya sabes, por la genialidad genética y todo eso."
+            ,
+            "Morty: Rick, esto es sobre él ¡Es el verdadero héroe aquí!"
+            ,
+            "Rick: Claro, Morty, claro. Pero vamos, alguien tiene que manejar la esfera, ¿no?"
+        };
+
+        public static string[] DialogoEpilogo1M = new string[]
+        {
+            "Tras la victoria en la final, el equipo celebra con entusiasmo.","  Rick se da cuenta del inmenso poder que tienen en sus manos con la Esfera de la Realidad.", "La discusión sobre quién debe quedarse con la esfera comienza de inmediato.",
+
+            "Rick: Muy bien, equipo, tenemos la Esfera de la Realidad. Obviamente, debería ser yo quien la conserve."," Ya saben, por el bien de la ciencia y el equilibrio del multiverso.",
+
+            "Morty: ¡Rick, no puedes simplemente quedarte con ella! ¡Él también tiene derecho a decidir!",
+
+            "Rick: Morty, Morty, Morty... la Esfera es demasiado poderosa para dejarla en manos de cualquiera.", "Incluso si ese cualquiera es un cientifico que respeto y ha demostrado ser un campeón.",
+
+            "Morty: ¡Pero Rick, eso no es justo! ¡Él se lo ganó!",
+
+            
+        };
+
+        public static string[] DialogoEpilogo1F = new string[]
+        {
+            "Tras la victoria en la final, el equipo celebra con entusiasmo.","  Rick se da cuenta del inmenso poder que tienen en sus manos con la Esfera de la Realidad.", "La discusión sobre quién debe quedarse con la esfera comienza de inmediato.",
+
+            "Rick: Muy bien, equipo, tenemos la Esfera de la Realidad. Obviamente, debería ser yo quien la conserve."," Ya saben, por el bien de la ciencia y el equilibrio del multiverso.",
+
+            "Morty: Rick, no puedes simplemente quedarte con la esfera. ¡Élla también tiene derecho a decidir!",
+
+            "Rick: Morty, Morty, Morty... la Esfera es demasiado poderosa para dejarla en manos de cualquiera.", "Incluso si esa cualquiera es una cientifica que respeto y ha demostrado ser una campeóna.",
+
+            "Morty: ¡Pero Rick, eso no es justo! ¡Élla se lo ganó!",
+
+            
+        };
+
+        public static string[] DialogoEpilogo2M = new string[]
+        {
+            "Rick: Está bien, Morty. Aquí está el trato: él tiene derecho a usar la Esfera para un deseo." ,"Lo que sea que necesite para su universo. Después de eso, yo la guardaré para proteger la integridad del multiverso.",
+
+            "El protagonista asiente, reconociendo la sabiduría en la decisión de Rick, pero también deseando algo muy personal.", "Con la Esfera de la Realidad, el protagonista pide un deseo para restaurar la paz y el equilibrio en su propio universo,", "asegurando un futuro mejor para su gente. Con el deseo concedido, la esfera queda en manos de Rick.",
+            "Rick: Bien, deseo concedido. Ahora, la Esfera de la Realidad estará segura bajo mi cuidado.","Prometo no hacer demasiadas locuras... al menos no más de lo habitual.",
+
+            "Morty: Esperemos que puedas mantener esa promesa, Rick.",
+
+           " Rick: Vamos, Morty, tengo todo bajo control. ¡Ahora, a celebrar! ","¡Ganamos el torneo y tenemos el poder del multiverso a nuestro alcance!",
+
+            "El equipo se dirige de regreso a su nave, con el protagonista satisfecho por haber salvado su mundo","y Rick más feliz que nunca con una nueva herramienta de poder.","Las aventuras continúan, pero con un nuevo campeón en la historia del multiverso."
+            ,"   ...FIN!",
+            "presiona una tecla para salir."
+        };
+
+
+        public static string[] DialogoEpilogo2F = new string[]
+        {
+            "Rick: Está bien, Morty. Aquí está el trato: élla tiene derecho a usar la Esfera para un deseo." ,"Lo que sea que necesite para su universo. Después de eso, yo la guardaré para proteger la integridad del multiverso.",
+
+            "La protagonista asiente, reconociendo la sabiduría en la decisión de Rick, pero también deseando algo muy personal.", "Con la Esfera de la Realidad, la protagonista pide un deseo para restaurar la paz y el equilibrio en su propio universo,", "asegurando un futuro mejor para su gente. Con el deseo concedido, la esfera queda en manos de Rick.",
+            "Rick: Bien, deseo concedido. Ahora, la Esfera de la Realidad estará segura bajo mi cuidado.","Prometo no hacer demasiadas locuras... al menos no más de lo habitual.",
+
+            "Morty: Esperemos que puedas mantener esa promesa, Rick.",
+
+           " Rick: Vamos, Morty, tengo todo bajo control. ¡Ahora, a celebrar! ","¡Ganamos el torneo y tenemos el poder del multiverso a nuestro alcance!",
+
+            "El equipo se dirige de regreso a su nave, con la protagonista satisfecha por haber salvado su mundo","y Rick más feliz que nunca con una nueva herramienta de poder.","Las aventuras continúan, pero con un nuevo campeón en la historia del multiverso."
+            ,"   ...FIN!",
+            "presiona una tecla para salir."
+        };
     }
 }
